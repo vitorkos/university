@@ -47,9 +47,10 @@ void f_buylist(struct Fruit *fruit, int tam)
     while(codigo != -1){
         printf("insira o codigo da fruta que sera comprada: (insira -1 para parar de comprar)\n");
         scanf("%d", &codigo);
-        printf("seu carrinho: R$ %.2f \n", soma);
 
         soma = soma + fruit[codigo].price;
+        
+        printf("seu carrinho: R$ %.2f \n", soma);
     }
 
     printf("o total da compra foi de R$%.2f", soma);
