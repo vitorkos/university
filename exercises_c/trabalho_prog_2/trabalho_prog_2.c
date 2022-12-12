@@ -21,7 +21,7 @@ void f_name(struct Fruit *fruit, int tam)
     for(int i = 0; i < tam; i++){
         printf("insira o nome da fruta %d: ", i);
         setbuf(stdin, 0);
-        scanf("%c", (fruit + i)->name);
+        scanf("%s", (fruit + i)->name);
         
     }
 }
