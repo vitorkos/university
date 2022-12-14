@@ -8,11 +8,7 @@ int potencia(int x, int y){
         i = i + 1;
     }
     return pot;
-
 }
-
-
-
 
 int main(){
     int x, y, a;
@@ -21,7 +17,7 @@ int main(){
     scanf("%d%d", &x, &y);
 
     a = potencia(x, y);
-    printf("x elevado a y é %d", a);
+    printf("x elevado a y ï¿½ %d", a);
 
-return 0;
+    return 0;
 }
