@@ -19,12 +19,12 @@ int main()
 {
     int x, y, a, m;
 
-    printf("insira tres valores: ");
+    printf("enter three numbers:");
     scanf("%d%d%d", &x, &y, &a);
 
     m = maior(x, y, a);
 
-    printf("o maior dos numeros eh %d", m);
+    printf("the bigger number is %d", m);
 
     return 0;
 }

@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int maior(int x, int y)
+int f_bigger(int x, int y)
 {
     int m;
     if (x > y){
@@ -14,14 +14,14 @@ int maior(int x, int y)
 
 int main()
 {
-    int x, y, m;
+    int x, y;
 
-    printf("insira dois valores: ");
+    printf("enter two numbers:");
     scanf("%d%d", &x, &y);
 
-    m = maior(x, y);
+    int bigger = f_bigger(x, y);
 
-    printf("o maior dos numeros eh %d", m);
+    printf("the bigger number is %d", bigger);
 
     return 0;
 }
