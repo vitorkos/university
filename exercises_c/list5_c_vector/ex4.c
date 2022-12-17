@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int f1(int vet[], int n)
+int f_bigger(int vet[], int n)
 {
     int i ;
     int maior = vet[0];
@@ -12,7 +12,7 @@ int f1(int vet[], int n)
     return maior;
 }
 
-int f2(int vet[], int n)
+int f_minor(int vet[], int n)
 {
     int i;
     int menor =vet[0];
@@ -26,18 +26,19 @@ int f2(int vet[], int n)
 
 int main()
 {
-    int n, i, mai, men;
-    printf("insira a quantidade de numeros do vetor: ");
+    int n, i;
+    printf("enter the size of the vector: ");
     scanf("%d", &n);
     int vet[n];
 
     for(i = 0; i < n; i ++){
-        printf("insira o valor do vetor %d", vet[i]);
+        printf("enter the %d element: ", i);
         scanf("%d", &vet[i]);
     }
-    mai = f1(vet, n);
-    men = f1(vet, n)
+    int bigger = f_bigger(vet, n);
+    int minor = f_minor(vet, n);
 
-    printf("%d\n%d", mai, men);
+    printf("%d - %d", bigger, minor);
 
+    return 0;
 }

@@ -3,12 +3,12 @@
 int main()
 {
     int n, i, aux, j;
-    printf("insira a quantidade de numeros do vetor");
+    printf("enter the size of the vector:");
     scanf("%d", &n);
     int vet[n];
 
     for(i = 0; i < n; i++){
-        printf("o valor do vetor %d eh: ", vet[i]);
+        printf("enter the %d number:", i);
         scanf("%d", &vet[i]);
     }
     for (i = 0; i < n; i++){
@@ -18,10 +18,11 @@ int main()
                 vet[j] = vet[i];
                 vet[i] = aux;
             }
+            else{}
         }
     }
     for(i = 0; i < n; i++){
-        printf("%d\n", vet[i]);
+        printf("%d - ", vet[i]);
     }
     return 0;
 }
