@@ -8,7 +8,7 @@ void matrizs(int *mat)
     for(i = 0; i < 4; i++){
         for(j = 0; j < 4; j++){
             printf("insira o valor de [%d][%d]", i, j);
-            scanf("%d", &mat[i][j]);
+            scanf("%d", mat[i][j]);
         }
     }
 }

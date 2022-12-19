@@ -4,7 +4,7 @@
 int main()
 {
     char str[100];
-    printf("insira uma string: ");
+    printf("enter a string: ");
     fgets(str, 100, stdin);
 
     for(int i = 0; str[i] != '\n'; i++){
@@ -15,8 +15,7 @@ int main()
 
     }
 
-    printf("%s", str);
+    printf("the string with vowels replaced by * is: %s " , str);
 
     return 0;
-
 }

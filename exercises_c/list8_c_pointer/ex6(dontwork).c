@@ -1,5 +1,3 @@
-//arrumar
-
 #include<stdio.h>
 #include<string.h>
 #include<assert.h>
@@ -26,11 +24,13 @@ return str2[100];
 
 int main()
 {
-    char string[100]
-    printf("insira uma frase: ");
-    fgets(string, 100, stdin);
-    char *str;
-    str = &string;
+  char string[100];
+  printf("insira uma frase: ");
+  fgets(string, 100, stdin);
+  char *str;
+  str = &string;
 
+    printf(" %s", inverso(str));
 
+  return 0;
 }

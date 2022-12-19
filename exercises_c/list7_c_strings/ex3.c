@@ -12,21 +12,21 @@ int main()
     char alfa2[27] = "zyxwvutsrqponmlkjihgfedcba";
     int j = 0;
 
-    char frase[500];
-    printf("insira uma frase: ");
-    fgets(frase, 500, stdin);
-    int len = strlen(frase) - 1;
+    char str[500];
+    printf("enter a string:");
+    fgets(str, 500, stdin);
+    int len = strlen(str) - 1;
 
     for(int i = 0; i != len; i++){
-        if(frase[i] == alfa[j]){
-            frase[i] = alfa2[j];
+        if(str[i] == alfa[j]){
+            str[i] = alfa2[j];
         }
         else{
             j++;
         }
     }
 
-    printf(" a frase invertida eh %s", frase);
+    printf("the string in reverse is: %s " , str);
 
     return 0;
 }
