@@ -6,7 +6,7 @@ int main()
 {
     float x1, x2, y1, y2;
 
-    printf("insira as coordenadas de x e y\n\n");
+    printf("Enter the coordenates: \n\n");
 
     printf("X1: ");
     scanf("%f", &x1);
@@ -27,10 +27,7 @@ int main()
 
     float resultado = sqrt(soma);
 
-    printf("a distancia entre dois pontos é de %f", resultado);
-
-
-
+    printf("the distance between the points is: %.2f", resultado);
 
     return 0;
 }
