@@ -1,23 +1,28 @@
 #include <stdio.h>
 
-int f_sum(int n)
+int f_pair(int n)
 {
-    if(n == 0){
+    if (n < 0){
         return 0;
     }
     else{
-        return n + f_sum(n - 1);
+        if (n % 2 == 0){
+            printf("%d\n", n);
+        }
+        else{
+            
+        }
     }
+    return f_pair(n - 1);
 }
 
 int main()
 {
     int n;
-    printf("Enter a number: ");
+    printf("Enter a pair number: ");
     scanf("%d", &n);
 
-    int result = f_sum(n);
-    printf("%d\n", result);
+    f_pair(n);
 
     return 0;
 }

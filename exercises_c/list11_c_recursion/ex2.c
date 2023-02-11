@@ -1,22 +1,25 @@
 #include <stdio.h>
 
-int f_sum(int vet[], int n)
-{
-    if (vet[] > n){
+int f_pair(int i, int n) {
+    if (i > n) {
         return 0;
     }
-    else{
-        return f_sum(vet[n]);
+
+    if ((i % 2) == 0) {
+        printf("%d\n", i);
     }
+
+    return f_pair(i + 1, n);
 }
 
 int main()
 {
-    int n = 10;
-    int vet[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int n;
+    int i = 0;
+    printf("Enter a pair number: ");
+    scanf("%d", &n);
 
-    int result = f_sum(vet, n);
-    printf("%d\n", result);
+    f_pair(i, n);
 
     return 0;
 }
