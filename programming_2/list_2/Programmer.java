@@ -1,7 +1,6 @@
 package list_2;
 
-public class Programmer {
-    
+class Programmer {
     Double monthly_salary;
     Double overtime;
 
@@ -21,5 +20,4 @@ public class Programmer {
         Double salary = monthly_salary * overtime;
         return salary;
     }
-    
 }

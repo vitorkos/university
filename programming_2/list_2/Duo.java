@@ -1,6 +1,6 @@
 package list_2;
 
-public class Duo {
+class Duo {
     
     Student student1;
     Student student2;
@@ -19,4 +19,3 @@ public class Duo {
         System.out.println("Student 2 : " + student1.getRegistration());
     }
 }
-    

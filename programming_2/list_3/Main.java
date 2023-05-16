@@ -1,6 +1,6 @@
 package list_3;
 
-public class Main {
+class Main {
     public static void main(String[] args){
         Dot dot = new Dot(3, 4);
         System.out.println("Coordenates of the dot: (" + dot.getCoordenateX() + " , " + dot.getCoordenateY() + ")");
@@ -12,10 +12,6 @@ public class Main {
         robot.goDown();
         robot.goRight();
         System.out.println("Position: (" + robot.getPosition().getCoordenateX() + " , " + robot.getPosition().getCoordenateY() + ")");
-       
-        
-        
-        
     }
     
 }

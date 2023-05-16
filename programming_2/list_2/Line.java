@@ -1,6 +1,6 @@
 package list_2;
 
-public class Line {
+class Line {
     
     Integer length;
 
@@ -13,5 +13,4 @@ public class Line {
     {
         this.length = length;
     }
-    
 }

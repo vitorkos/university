@@ -1,6 +1,6 @@
 package list_1;
 
-public class Lamp {
+class Lamp {
     
     Boolean state;
     

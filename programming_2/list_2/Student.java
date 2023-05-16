@@ -1,6 +1,6 @@
 package list_2;
 
-public class Student {
+class Student {
     
     String name;
     Integer registration;
@@ -23,6 +23,4 @@ public class Student {
     {
         return name;
     }
-    
-    
 }

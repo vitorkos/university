@@ -1,6 +1,6 @@
 package list_2;
 
-public class Book {
+class Book {
     
     String title;
     Integer pages;

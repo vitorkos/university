@@ -1,6 +1,6 @@
 package list_3;
 
-public class Robot {
+class Robot {
     private String name;
     private Dot position;
     Robot(String name, Dot position){

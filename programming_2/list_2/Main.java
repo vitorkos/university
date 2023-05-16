@@ -1,6 +1,6 @@
 package list_2;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         System.out.println("-Car-");
         Car car = new Car("fiat", "147", 1976, 20);
@@ -52,5 +52,4 @@ public class Main {
         
         System.out.println(programmer_hours.calculateSalary());
     }
-    
 }

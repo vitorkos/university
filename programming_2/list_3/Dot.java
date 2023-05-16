@@ -1,6 +1,6 @@
 package list_3;
 
-public class Dot {
+class Dot {
     private Integer x;
     private Integer y;
     Dot(){

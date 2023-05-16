@@ -1,6 +1,6 @@
 package list_2;
 
-public class Author {
+class Author {
     
     String name;
     String gender;
@@ -16,7 +16,4 @@ public class Author {
         this.name = name;
         this.gender = gender;
     }
-    
-    
-    
 }

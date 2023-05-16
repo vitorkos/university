@@ -1,6 +1,6 @@
 package list_1;
 
-public class Date {
+class Date {
 
     int day;
     int month;

@@ -1,6 +1,6 @@
 package list_2;
 
-public class ProgrammerHours {
+class ProgrammerHours {
     
     Double value_hour;
     Double worked_hour;

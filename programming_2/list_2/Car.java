@@ -1,6 +1,6 @@
 package list_2;
 
-public class Car {
+class Car {
     
     String brand;
     String model;
@@ -31,10 +31,5 @@ public class Car {
     {
         speed -= 10;
     }
-
-
-
-
-
 }
 

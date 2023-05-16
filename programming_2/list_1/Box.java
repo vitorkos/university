@@ -1,6 +1,6 @@
 package list_1;
 
-public class Box {
+class Box {
     
     Double width;
     Double height;
