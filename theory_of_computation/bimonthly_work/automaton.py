@@ -48,6 +48,29 @@ def convert_afnd_to_afd(automaton_afnd):
     
     states_to_process = [afd["initial"]]
     processed_states = set()
+    
+    while len(states_to_process) > 0:
+        current_state = states_to_process.pop()
+        processed_states.add(tuple(current_state))
+        
+        for symbol in {t["read"] for t in automaton_afnd["transitions"]}:
+            destinations = get_destinations(current_state, symbol)
+            
+            if len(destinations) > 0:
+                afd["transitions"].append({"from": current_state, "read": symbol, "to": list(destinations)})
+                
+                if tuple(destinations) not in processed_states:
+                    states_to_process.append(list(destinations))
+                    
+        if any(final_state in current_state for final_state in automaton_afnd["final"]):
+            afd["final"].append(current_state)
+    
+    return afd
+    
+    
+    
+    
+    
 
 def is_deterministic(automaton_json):
     for transition in automaton_json["transitions"]:
