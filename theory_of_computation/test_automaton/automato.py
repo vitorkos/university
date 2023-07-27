@@ -56,6 +56,8 @@ def simulateAfnd(automato, entrada):
     else:
         return False
 
+
+
 json_file = "automato.aut"
 automato_objeto = readJson(json_file)
 
