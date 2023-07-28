@@ -1,6 +1,0 @@
-Input,Expected,Result,Time
-aaaabbbbbaaaaa,1,False,0.000009
-abababab,0,False,0.000004
-bbbbbbbb,0,False,0.000003
-aaaaaaaaaaaa,0,False,0.000004
-aaaaabaaaaa,1,False,0.000004
