@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern FILE *f_arquivo;
+extern FILE *arquivo_final;
 //DEFININDO TYPEDEF PARA OS PRODUTOS E PARA A LISTA
 
 //Tipo Produto
@@ -27,7 +27,7 @@ Lista *RetiraListaProduto(Lista *l, int codigo);
 int VerificaListaProduto(Lista *l, int codigo);
 
 //Verifica se um produto está vencido
-int VerificaListaValidade(Lista *l, int dia, int mes, int ano);
+Lista *VerificaListaValidade(Lista *l, int dia, int mes, int ano);
 
 //Atualiza o preço de um produto
 Lista *AtualizaPrecoProduto(Lista *l, int codigo, float valor);

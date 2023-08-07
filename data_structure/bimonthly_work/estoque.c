@@ -112,9 +112,11 @@ int VerificaListaProduto(Lista *l, int codigo){
 
     //Verifica se o produto foi encontrado
     if (p == NULL){
+        fprintf(arquivo_final, "PRODUTO %d NAO ENCONTRADO\n", codigo);
         return 0;
     }
 
+    fprintf(arquivo_final, "PRODUTO %s %d ENCONTRADO\n", p->produto->nome, p->produto->codigo);
     return 1;
 }
 
@@ -176,6 +178,8 @@ Lista *VerificaListaValidade(Lista *l, int dia, int mes, int ano){
 void ImprimeListaProdutos(Lista *l){
     Lista *p = l;
 
+    fseek(arquivo_final, 0, SEEK_END);
+
     //Verifica se a lista está vazia
     if (p == NULL){
         fprintf(arquivo_final, "LISTA VAZIA\n");
@@ -185,7 +189,7 @@ void ImprimeListaProdutos(Lista *l){
     //Imprime a lista
     fprintf(arquivo_final, "LISTA DE PRODUTOS:\n");
     while (p != NULL){
-        fprintf(arquivo_final, "%s %d %.2f %d/%d/%d\n", p->produto->nome, p->produto->codigo, p->produto->valor, p->produto->data[0], p->produto->data[1], p->produto->data[2]);
+        fprintf(arquivo_final, "%s %d %.1f %d/%d/%d\n", p->produto->nome, p->produto->codigo, p->produto->valor, p->produto->data[0], p->produto->data[1], p->produto->data[2]);
         p = p->prox;
     }
 }
