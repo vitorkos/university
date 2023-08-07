@@ -48,7 +48,7 @@ Produto *CriaProduto(char *nome, int codigo, float valor, int *data){
 Lista *InsereListaProduto(Lista *l, Produto *p){
     Lista *novo = (Lista*) malloc(sizeof(Lista));
 
-    fseek(f_arquivo, 0, SEEK_END);
+    fseek(arquivo_final, 0, SEEK_END);
 
     //Verifica se a alocação foi bem sucedida
     if (novo == NULL){
@@ -60,7 +60,7 @@ Lista *InsereListaProduto(Lista *l, Produto *p){
     novo->produto = p;
     novo->prox = l;
 
-    fprintf(f_arquivo, "PRODUTO %s %d ADICIONADO\n", p->nome, p->codigo);
+    fprintf(arquivo_final, "PRODUTO %s %d ADICIONADO\n", p->nome, p->codigo);
 
     return novo;
 }
@@ -70,7 +70,7 @@ Lista *RetiraListaProduto(Lista *l, int codigo){
     Lista *ant = CriaLista();
     Lista *p = l;
 
-    fseek(f_arquivo, 0, SEEK_END);
+    fseek(arquivo_final, 0, SEEK_END);
 
     //Procura o produto na lista
     while (p != NULL && p->produto->codigo != codigo){
@@ -80,7 +80,7 @@ Lista *RetiraListaProduto(Lista *l, int codigo){
 
     //Verifica se o produto foi encontrado
     if (p == NULL){
-        fprintf(f_arquivo, "PRODUTO %d NAO ENCONTRADO\n", codigo);
+        fprintf(arquivo_final, "PRODUTO %d NAO ENCONTRADO\n", codigo);
         return l;
     }
 
@@ -93,7 +93,7 @@ Lista *RetiraListaProduto(Lista *l, int codigo){
         ant->prox = p->prox;
     }
 
-    fprintf(f_arquivo, "PRODUTO %s %d REMOVIDO\n", p->produto->nome, p->produto->codigo);
+    fprintf(arquivo_final, "PRODUTO %s %d REMOVIDO\n", p->produto->nome, p->produto->codigo);
 
     free(p->produto);
     free(p);
@@ -129,14 +129,14 @@ Lista *AtualizaPrecoProduto(Lista *l, int codigo, float valor){
 
     //Verifica se o produto foi encontrado
     if (p == NULL){
-        fprintf(f_arquivo, "PRODUTO %d NAO ENCONTRADO\n", codigo);
+        fprintf(arquivo_final, "PRODUTO %d NAO ENCONTRADO\n", codigo);
         return l;
     }
 
     //Atualiza o preço do produto
     p->produto->valor = valor;
 
-    fprintf(f_arquivo, "PRODUTO %s %d PRECO ATUALIZADO PARA %.2f\n", p->produto->nome, p->produto->codigo, p->produto->valor);
+    fprintf(arquivo_final, "PRODUTO %s %d PRECO ATUALIZADO PARA %.2f\n", p->produto->nome, p->produto->codigo, p->produto->valor);
 
     return l;
 }
@@ -177,14 +177,14 @@ void ImprimeListaProdutos(Lista *l){
 
     //Verifica se a lista está vazia
     if (p == NULL){
-        fprintf(f_arquivo, "LISTA VAZIA\n");
+        fprintf(arquivo_final, "LISTA VAZIA\n");
         return;
     }
 
     //Imprime a lista
-    fprintf(f_arquivo, "LISTA DE PRODUTOS:\n");
+    fprintf(arquivo_final, "LISTA DE PRODUTOS:\n");
     while (p != NULL){
-        fprintf(f_arquivo, "%s %d %.2f %d/%d/%d\n", p->produto->nome, p->produto->codigo, p->produto->valor, p->produto->data[0], p->produto->data[1], p->produto->data[2]);
+        fprintf(arquivo_final, "%s %d %.2f %d/%d/%d\n", p->produto->nome, p->produto->codigo, p->produto->valor, p->produto->data[0], p->produto->data[1], p->produto->data[2]);
         p = p->prox;
     }
 }
