@@ -142,7 +142,7 @@ Lista *AtualizaPrecoProduto(Lista *l, int codigo, float valor){
 }
 
 //Verifica se um produto está vencido
-int VerificaValidadeProduto(Lista *l, int codigo, int dia, int mes, int ano){
+int VerificaListaValidade(Lista *l, int dia, int mes, int ano){
     Lista *p = l;
 
     //Procura o produto na lista
