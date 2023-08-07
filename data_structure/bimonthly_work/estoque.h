@@ -1,44 +1,42 @@
-#include <stdio.h>;
-#include <stdlib.h>;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-struct produto{
-    char nome[20];
-    int codigo;
-    float valor;
-    int data[3];
-};
+extern FILE *f_arquivo;
+//DEFININDO TYPEDEF PARA OS PRODUTOS E PARA A LISTA
 
-struct lista{
-    struct produto *produto;
-    struct lista *prox;
-};
-
-typedef struct lista Lista;
+//Tipo Produto
 typedef struct produto Produto;
 
+//Tipo Lista
+typedef struct lista Lista;
 
-/* Cria um novo produto */
-Produto * CriaProduto ( char * nome , int codigo , float valor , int*data_de_validade ) ;
+//Cria lista vazia
+Lista *CriaLista();
 
-Lista * CriaLista () ;
+//Cria um produto
+Produto *CriaProduto(char *nome, int codigo, float valor, int *data);
 
-/* Insere um produto em uma lista */
-Lista * InsereListaProduto ( Lista * l , Produto * p ) ;
+//Insere um produto na lista
+Lista *InsereListaProduto(Lista *l, Produto *p);
 
-/* Retira um produto de uma determinada lista */
-Lista * RetiraListaProduto ( Lista * l , int id_produto ) ;
+//Retira um produto da lista
+Lista *RetiraListaProduto(Lista *l, int codigo);
 
-/* Verifica se um produto e s t presente em uma determinada lista */
-int VerificaListaProduto ( Lista * p , int id_produto ) ;
+//Verifica se um produto está na lista
+int VerificaListaProduto(Lista *l, int codigo);
 
-/* Verifica se existe um produto e s t vencido em uma determinadalista */
-Lista * VerificaListaValidade ( Lista * p, int d, int m, int a) ;
+//Verifica se um produto está vencido
+int VerificaListaValidade(Lista *l, int dia, int mes, int ano);
 
-/* Imprime todos os produtos de uma lista */
-void ImprimeListaProdutos ( Lista * p ) ;
+//Atualiza o preço de um produto
+Lista *AtualizaPrecoProduto(Lista *l, int codigo, float valor);
 
-/* Orderna Lista pelo valor do produto */
-Lista * OrdenaListaValor ( Lista * p ) ;
+//Imprime a lista
+void ImprimeListaProdutos(Lista *l);
 
-/* Orderna Lista pelo valor do produto */
-Lista * OrdenaListaVencimento ( Lista * p ) ;
+//Ordena a lista
+Lista *OrdenaListaValor(Lista *l);
+
+//Ordena lisa vencimento
+Lista *OrdenaListaVencimento(Lista *l);
