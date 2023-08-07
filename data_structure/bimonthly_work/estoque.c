@@ -26,7 +26,7 @@ Produto *CriaProduto(char *nome, int codigo, float valor, int *data){
 
     //Verifica se a alocação foi bem sucedida
     if (p == NULL){
-        puts("Fala ao criar o produto!"\n");
+        puts("Fala ao criar o produto!\n");
         perror(NULL);
     }
 
@@ -35,7 +35,7 @@ Produto *CriaProduto(char *nome, int codigo, float valor, int *data){
     p->valor = valor;
     for (int i = 0; i < sizeof(p->nome); i++) {
         if (i < 3) {
-            p->data[i] = *(data_de_validade + i);
+            p->data[i] = *(data + i);
         }
 
         p->nome[i] = *(nome + i);
@@ -52,7 +52,7 @@ Lista *InsereListaProduto(Lista *l, Produto *p){
 
     //Verifica se a alocação foi bem sucedida
     if (novo == NULL){
-        puts("Falha ao inserir o produto!"\n");
+        puts("Falha ao inserir o produto!\n");
         perror(NULL);
     }
 
@@ -142,33 +142,34 @@ Lista *AtualizaPrecoProduto(Lista *l, int codigo, float valor){
 }
 
 //Verifica se um produto está vencido
-int VerificaListaValidade(Lista *l, int dia, int mes, int ano){
+Lista *VerificaListaValidade(Lista *l, int dia, int mes, int ano){
     Lista *p = l;
+    int flag = 0;
 
-    //Procura o produto na lista
-    while (p != NULL && p->produto->codigo != codigo){
-        p = p->prox;
-    }
+    fseek(arquivo_final, 0, SEEK_END);
 
-    //Verifica se o produto foi encontrado
-    if (p == NULL){
-        return 0;
-    }
-
-    //Verifica se o produto está vencido
-    if (p->produto->data[2] < ano){
-        return 1;
-    } else if (p->produto->data[2] == ano){
-        if (p->produto->data[1] < mes){
-            return 1;
-        } else if (p->produto->data[1] == mes){
-            if (p->produto->data[0] < dia){
-                return 1;
+    for(p = l; p != NULL; p = p->prox){
+        if(p->produto->data[2] < ano){
+            fprintf(arquivo_final, "PRODUTO %s %d VENCIDO\n", p->produto->nome, p->produto->codigo);
+            flag = 1;
+        } else if(p->produto->data[2] == ano){
+            if(p->produto->data[1] < mes){
+                fprintf(arquivo_final, "PRODUTO %s %d VENCIDO\n", p->produto->nome, p->produto->codigo);
+                flag = 1;
+            } else if(p->produto->data[1] == mes){
+                if(p->produto->data[0] < dia){
+                    fprintf(arquivo_final, "PRODUTO %s %d VENCIDO\n", p->produto->nome, p->produto->codigo);
+                    flag = 1;
+                }
             }
         }
     }
 
-    return 0;
+    if(flag == 0){
+        fprintf(arquivo_final, "NAO HA PRODUTOS VENCIDOS\n");
+    }
+
+    return l;
 }
 
 //Imprime a lista de produtos
