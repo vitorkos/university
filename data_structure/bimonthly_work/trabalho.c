@@ -80,16 +80,16 @@ int main(int argc, char *argv[]){
             fscanf(arquivo, "%d", &data[0]);
             fscanf(arquivo, "%d", &data[1]);
             fscanf(arquivo, "%d", &data[2]);
-            l = VerificaValidadeProdutos(l, data[0], data[1], data[2]);
+            l = VerificaListaValidade(l, data[0], data[1], data[2]);
         }
 
         else if(!strcmp(leitor, "VERIFICA_LISTA")){
             fscanf(arquivo, "%d", &codigo);
-            int x = VerificaListaProduto(l, codigo);
+            int isInList = VerificaListaProduto(l, codigo);
         }
 
-            else if (!strcmp(leitor, "ORDENA_LISTA_VALIDADE")) {
-        l = OrdenaListaVencimento(l);
+        else if (!strcmp(leitor, "ORDENA_LISTA_VALIDADE")) {
+            l = OrdenaListaVencimento(l);
         }
 
         else if (!strcmp(leitor, "ORDENA_LISTA_VALOR")) {
