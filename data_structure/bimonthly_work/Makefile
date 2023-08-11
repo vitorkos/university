@@ -1,13 +1,13 @@
 # makefile
 
 # Defina o compilador a ser usado (gcc, clang, etc.)
-CC = gcc
+CC = x86_64-w64-mingw32-gcc
 
 # Defina as opções de compilação
 CFLAGS = -Wall -Wextra -pedantic
 
 # Defina o nome do executável
-EXECUTABLE = trabalho
+EXECUTABLE = trabalho.exe
 
 # Defina os arquivos fonte do projeto
 SOURCES = trabalho.c estoque.c
