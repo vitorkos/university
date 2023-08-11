@@ -54,10 +54,10 @@ def simulateAfndEpsilon(automato, entrada):
 
 
 # Main
-json_file = "automato_afd.aut"
+json_file = "automato_afnd_e.aut"
 automato_objeto = readJson(json_file)
 
-input_file = "input_afd.in"
+input_file = "input_afnd_e.in"
 input_csv = readInput(input_file)
 
 for entrada, resultado_esperado in input_csv:
@@ -66,3 +66,4 @@ for entrada, resultado_esperado in input_csv:
     end_time = time.time()
     tempo_processamento = end_time - start_time
     print(f"Entrada: {entrada}, Resultado Esperado: {resultado_esperado}, Resultado Obtido: {resultado_obtido}, Tempo de Processamento: {tempo_processamento:.6f} segundos")
+    
