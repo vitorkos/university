@@ -2,17 +2,18 @@ import json
 import os
 import csv
 import time
+import argparse
 
-# Function to read the JSON file
+# Função para ler o arquivo JSON
 def readJson(json_file):
-    caminho_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), json_file))
+    caminho_absoluto = os.path.abspath(json_file)
     with open(caminho_absoluto, 'r') as file:
         automato_json = json.load(file)
     return automato_json
 
-# Function to read the input file
+# Função para ler o arquivo de entrada
 def readInput(input_file):
-    caminho_absoluto = os.path.abspath(os.path.join(os.path.dirname(__file__), input_file))
+    caminho_absoluto = os.path.abspath(input_file)
     lista_dados = []
     with open(caminho_absoluto, newline='') as file:
         leitor_csv = csv.reader(file, delimiter=';')
@@ -23,7 +24,7 @@ def readInput(input_file):
     return lista_dados
 
 
-# Function to simulate the AFND with epsilon transitions using the delta transition function
+# Função para simular o AFND com transições epsilon usando a função de transição delta
 def simulateAfndEpsilon(automato, entrada):
     def delta(estado_atual, simbolo):
         estados_destino = set()
@@ -53,17 +54,29 @@ def simulateAfndEpsilon(automato, entrada):
     return any(estado in estados_finais for estado in estados_atuais)
 
 
-# Main
-json_file = "automato_afnd_e.aut"
-automato_objeto = readJson(json_file)
+# Função principal
+def main():
+    parser = argparse.ArgumentParser(description="Simula um AFND com transições epsilon a partir de um arquivo JSON e um arquivo de entrada CSV.")
+    parser.add_argument("automato", type=str, help="Caminho para o arquivo de definição do autômato (formato .aut)")
+    parser.add_argument("input", type=str, help="Caminho para o arquivo de entrada (formato .in)")
+    parser.add_argument("output", type=str, help="Caminho para o arquivo de saída (formato .out)")
+    args = parser.parse_args()
 
-input_file = "input_afnd_e.in"
-input_csv = readInput(input_file)
+    automato_file = args.automato
+    automato_objeto = readJson(automato_file)
 
-for entrada, resultado_esperado in input_csv:
-    start_time = time.time()
-    resultado_obtido = simulateAfndEpsilon(automato_objeto, entrada)
-    end_time = time.time()
-    tempo_processamento = end_time - start_time
-    print(f"Entrada: {entrada}, Resultado Esperado: {resultado_esperado}, Resultado Obtido: {resultado_obtido}, Tempo de Processamento: {tempo_processamento:.6f} segundos")
-    
+    input_file = args.input
+    input_csv = readInput(input_file)
+
+    output_file = args.output
+
+    with open(output_file, 'w') as outfile:
+        for entrada, resultado_esperado in input_csv:
+            start_time = time.time()
+            resultado_obtido = simulateAfndEpsilon(automato_objeto, entrada)
+            end_time = time.time()
+            tempo_processamento = end_time - start_time
+            outfile.write(f"Entrada: {entrada}, Resultado Esperado: {resultado_esperado}, Resultado Obtido: {resultado_obtido}, Tempo de Processamento: {tempo_processamento:.6f} segundos\n")
+
+if __name__ == "__main__":
+    main()
