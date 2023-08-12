@@ -24,7 +24,7 @@ def readInput(input_file):
     return lista_dados
 
 
-# Função para simular o AFND com transições epsilon usando a função de transição delta
+# Function to simulate the AFND with epsilon transitions using the delta transition function
 def simulateAfndEpsilon(automato, entrada):
     def delta(estado_atual, simbolo):
         estados_destino = set()

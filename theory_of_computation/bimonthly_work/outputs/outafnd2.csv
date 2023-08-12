@@ -1,0 +1,10 @@
+Entrada: a, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000022 segundos
+Entrada: ab, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000019 segundos
+Entrada: aaa, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000019 segundos
+Entrada: aab, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000017 segundos
+Entrada: baa, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000013 segundos
+Entrada: b, Resultado Esperado: 0, Resultado Obtido: False, Tempo de Processamento: 0.000004 segundos
+Entrada: bbb, Resultado Esperado: 0, Resultado Obtido: False, Tempo de Processamento: 0.000008 segundos
+Entrada: aba, Resultado Esperado: 0, Resultado Obtido: True, Tempo de Processamento: 0.000016 segundos
+Entrada: bab, Resultado Esperado: 0, Resultado Obtido: True, Tempo de Processamento: 0.000021 segundos
+Entrada: abb, Resultado Esperado: 0, Resultado Obtido: True, Tempo de Processamento: 0.000026 segundos

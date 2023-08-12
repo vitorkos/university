@@ -1,0 +1,5 @@
+Entrada: aa, Resultado Esperado: 0, Resultado Obtido: False, Tempo de Processamento: 0.000028 segundos
+Entrada: ab, Resultado Esperado: 1, Resultado Obtido: False, Tempo de Processamento: 0.000017 segundos
+Entrada: abb, Resultado Esperado: 1, Resultado Obtido: False, Tempo de Processamento: 0.000016 segundos
+Entrada: bbb, Resultado Esperado: 0, Resultado Obtido: False, Tempo de Processamento: 0.000014 segundos
+Entrada: ba, Resultado Esperado: 0, Resultado Obtido: False, Tempo de Processamento: 0.000010 segundos
