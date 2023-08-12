@@ -43,6 +43,7 @@ int main(int argc, char *argv[]){
     float valor;
     int data[3];
 
+
     //Cria a lista
     Lista *l = CriaLista();
 
@@ -85,7 +86,7 @@ int main(int argc, char *argv[]){
 
         else if(!strcmp(leitor, "VERIFICA_LISTA")){
             fscanf(arquivo, "%d", &codigo);
-            int isInList = VerificaListaProduto(l, codigo);
+            int naLista = VerificaListaProduto(l, codigo);
         }
 
         else if (!strcmp(leitor, "ORDENA_LISTA_VALIDADE")) {
