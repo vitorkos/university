@@ -8,6 +8,10 @@ CFLAGS = -Wall -Wextra -pedantic
 
 # Defina o nome do executável
 EXECUTABLE = trabalho.exe
+#para o binario normal, tirar o .exe
+#.exe para o executavel do windows 
+
+
 
 # Defina os arquivos fonte do projeto
 SOURCES = trabalho.c estoque.c
