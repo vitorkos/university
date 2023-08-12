@@ -1,0 +1,6 @@
+Entrada: ba, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000025 segundos
+Entrada: aaaabbbbbaaaaa, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000043 segundos
+Entrada: abababab, Resultado Esperado: 0, Resultado Obtido: True, Tempo de Processamento: 0.000021 segundos
+Entrada: bbbbbbbb, Resultado Esperado: 0, Resultado Obtido: True, Tempo de Processamento: 0.000019 segundos
+Entrada: aaaaaaaaaaaa, Resultado Esperado: 0, Resultado Obtido: True, Tempo de Processamento: 0.000031 segundos
+Entrada: aaaaabaaaaa, Resultado Esperado: 1, Resultado Obtido: True, Tempo de Processamento: 0.000038 segundos

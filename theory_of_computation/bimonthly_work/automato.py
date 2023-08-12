@@ -53,10 +53,25 @@ def simulateAfndEpsilon(automato, entrada):
     estados_finais = {int(estado) for estado in automato['final']}
     return any(estado in estados_finais for estado in estados_atuais)
 
+# Função para verificar se uma entrada é aceita pelo autômato
+def isAccepted(automato, entrada):
+    estado_atual = int(automato['initial'])
+    for simbolo in entrada:
+        estado_destino = None
+        for transicao in automato['transitions']:
+            if int(transicao['from']) == estado_atual and transicao['read'] == simbolo:
+                estado_destino = int(transicao['to'])
+                break
+        if estado_destino is None:
+            return False  # Não encontramos uma transição para o símbolo atual
+        estado_atual = estado_destino
+
+    estados_finais = {int(estado) for estado in automato['final']}
+    return estado_atual in estados_finais
 
 # Função principal
 def main():
-    parser = argparse.ArgumentParser(description="Simula um AFND com transições epsilon a partir de um arquivo JSON e um arquivo de entrada CSV.")
+    parser = argparse.ArgumentParser(description="Simula um AFND a partir de um arquivo JSON e um arquivo de entrada CSV.")
     parser.add_argument("automato", type=str, help="Caminho para o arquivo de definição do autômato (formato .aut)")
     parser.add_argument("input", type=str, help="Caminho para o arquivo de entrada (formato .in)")
     parser.add_argument("output", type=str, help="Caminho para o arquivo de saída (formato .out)")
@@ -73,7 +88,7 @@ def main():
     with open(output_file, 'w') as outfile:
         for entrada, resultado_esperado in input_csv:
             start_time = time.time()
-            resultado_obtido = simulateAfndEpsilon(automato_objeto, entrada)
+            resultado_obtido = isAccepted(automato_objeto, entrada)
             end_time = time.time()
             tempo_processamento = end_time - start_time
             outfile.write(f"Entrada: {entrada}, Resultado Esperado: {resultado_esperado}, Resultado Obtido: {resultado_obtido}, Tempo de Processamento: {tempo_processamento:.6f} segundos\n")
