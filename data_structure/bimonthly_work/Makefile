@@ -1,28 +1,44 @@
-# makefile
-
 # Defina o compilador a ser usado (gcc, clang, etc.)
-CC = x86_64-w64-mingw32-gcc
+CC = gcc
 
 # Defina as opções de compilação
 CFLAGS = -Wall -Wextra -pedantic
 
-# Defina o nome do executável
-EXECUTABLE = trabalho.exe
-#para o binario normal, tirar o .exe
-#.exe para o executavel do windows 
+# Defina o nome dos executáveis
+EXECUTABLE1 = trabalho
+EXECUTABLE2 = trabalho2
 
+# Arquivos fonte do primeiro projeto
+SOURCES1 = trabalho.c estoque.c
+HEADERS1 = estoque.h
 
+# Arquivos fonte do segundo projeto
+SOURCES2 = trabalho2.c lista.c
+HEADERS2 = lista.h
 
-# Defina os arquivos fonte do projeto
-SOURCES = trabalho.c estoque.c
+# Objetos gerados para o primeiro projeto
+OBJECTS1 = $(patsubst %.c,%.o,$(SOURCES1))
 
-# Defina o alvo padrão (gera o executável)
-all: $(EXECUTABLE)
+# Objetos gerados para o segundo projeto
+OBJECTS2 = $(patsubst %.c,%.o,$(SOURCES2))
 
-# Gera o executável
-$(EXECUTABLE): $(SOURCES)
-	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(SOURCES)
+# Defina o alvo padrão (gera ambos os executáveis)
+all: $(EXECUTABLE1) $(EXECUTABLE2)
 
-# Comando para limpar os arquivos objetos e o executável
+# Gera o executável para o primeiro projeto
+$(EXECUTABLE1): $(OBJECTS1)
+	$(CC) $(CFLAGS) -o $(EXECUTABLE1) $(OBJECTS1)
+
+# Gera o executável para o segundo projeto
+$(EXECUTABLE2): $(OBJECTS2)
+	$(CC) $(CFLAGS) -o $(EXECUTABLE2) $(OBJECTS2)
+
+# Regras para compilar objetos
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Comando para limpar os arquivos objetos e os executáveis
 clean:
-	rm -f $(EXECUTABLE)
+	rm -f *.o $(EXECUTABLE1) $(EXECUTABLE2)
+
+.PHONY: all clean
