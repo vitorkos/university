@@ -1,5 +1,6 @@
 #include "estoque.h"
 
+
 struct produto{
     char nome[20];
     int codigo;
