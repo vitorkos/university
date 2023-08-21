@@ -7,8 +7,8 @@ void criaListas(FILE *arquivo, int tamanho) {
         // Gerar dados para o produto
         char nome[20];
         sprintf(nome, "FEIJAO");
-        int codigo = 100 + i;
-        float valor = tamanho - i;
+        int codigo = 10000 + i;
+        float valor = i;
         int dia = rand() % 28 + 1;
         int mes = rand() % 12 + 1;
         int ano = 2023 + rand() % 3;
