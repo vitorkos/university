@@ -26,7 +26,5 @@ class Main{
 
         System.out.println(("VARARGS EXERCISE"));
         System.out.println(Myclass.mathOperations("SUM", 2, 4, 6));
-
-    
     }
 }
