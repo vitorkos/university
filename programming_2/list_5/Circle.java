@@ -1,4 +1,4 @@
-package com.mycompany.list_5;
+package list_5;
 
 public class Circle extends Dot{
     Dot dot;
@@ -11,5 +11,4 @@ public class Circle extends Dot{
         super(x, y);
         radius = r;
     }
-   
 }

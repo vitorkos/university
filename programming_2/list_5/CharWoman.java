@@ -1,4 +1,4 @@
-package com.mycompany.list_5;
+package  list_5;
 
 public class CharWoman extends Employee{
     double salary_day;

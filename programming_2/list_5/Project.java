@@ -1,4 +1,4 @@
-package com.mycompany.list_5;
+package list_5;
 
 public abstract class Project {
     int code;

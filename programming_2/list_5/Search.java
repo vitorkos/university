@@ -1,4 +1,4 @@
-package com.mycompany.list_5;
+package list_5;
 
 public class Search extends Project{
     String cnpq_area;
