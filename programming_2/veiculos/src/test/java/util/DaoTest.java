@@ -1,6 +1,6 @@
 package util;
 
-import modelo.Vaca;
+//import modelo.Vaca;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,5 +41,5 @@ public class DaoTest {
 //        Dao<Vaca> dao = new Dao(Vaca.class);
 //        dao.inserir(vaca);
 //    }
-//    
+    
 }
