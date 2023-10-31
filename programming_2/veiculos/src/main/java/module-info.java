@@ -1,7 +1,7 @@
-module com.trabalho {
+module com.app {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens com.trabalho to javafx.fxml;
-    exports com.trabalho;
+    opens com.app to javafx.fxml;
+    exports com.app;
 }
