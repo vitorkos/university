@@ -23,7 +23,7 @@ public class Operator extends Person implements Persistent, Serializable{
     }
 
     public Operator(String login, String password, String name, String cpf, String rg, String phone, String email, String address) {
-        super(name, cpf, rg, phone, email, address);
+        super(name, address);
         this.login = login;
         this.password = password;
     }

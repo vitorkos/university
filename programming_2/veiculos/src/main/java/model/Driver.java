@@ -26,7 +26,7 @@ public class Driver extends Person implements Persistent, Serializable{
     }
 
     public Driver(String cnh, String cnhCategory, String sector, String name, String cpf, String rg, String phone, String email, String address) {
-        super(name, cpf, rg, phone, email, address);
+        super(name, address);
         this.cnh = cnh;
         this.cnhCategory = cnhCategory;
         this.sector = sector;
@@ -57,7 +57,7 @@ public class Driver extends Person implements Persistent, Serializable{
     }
 
     @Override
-    public int hashcode(){
+    public int hashCode(){
         int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.cnh);
         return hash;
