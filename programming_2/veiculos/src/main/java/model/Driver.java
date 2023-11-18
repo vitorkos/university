@@ -1,17 +1,15 @@
 package model;
 
-import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import util.Persistent;
 
 @Entity
 @Table(name = "driver")
 @DiscriminatorValue("D")
-public class Driver extends Person implements Persistent, Serializable{
+public class Driver extends Person {
 
     @Column
     private String cnh;
