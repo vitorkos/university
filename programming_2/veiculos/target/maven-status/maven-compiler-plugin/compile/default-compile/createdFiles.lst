@@ -1,5 +1,6 @@
-app/SecondaryController.class
 module-info.class
-util/JpaUtil.class
 app/App.class
+app/SecondaryController.class
+util/Dao.class
+util/JpaUtil.class
 app/PrimaryController.class
