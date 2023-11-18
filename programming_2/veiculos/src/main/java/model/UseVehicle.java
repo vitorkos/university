@@ -50,6 +50,7 @@ public class UseVehicle implements Serializable, Persistent {
         this.returnDate = returnDate;
     }
 
+    @Override
     public Integer getCode() {
         return code;
     }

@@ -40,6 +40,7 @@ public class Person implements Persistent, Serializable{
         this.address = address;
     }
 
+    @Override
     public Integer getCode() {
         return code;
     }
