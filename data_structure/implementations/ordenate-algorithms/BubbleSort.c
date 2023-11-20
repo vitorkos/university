@@ -15,6 +15,8 @@ void bubbleSort(Item* v, int n){
     int i, j;
     for(i = 0; i < n-1; i++){
         for(j = 1; j < n-i; j++){
+            // o i é a quantidade de itens que foram ordenados, que foram jogados no fim do vetor
+            // n - i faz com que a iteração não passe pelos valores já ordenados
             if(v[j].valor < v[j-1].valor){
                 troca(v[j-1], v[j]);
             }

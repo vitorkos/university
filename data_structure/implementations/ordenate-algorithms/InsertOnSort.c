@@ -16,6 +16,7 @@ void insertSort(Item* v, int n){
     Item item;
     for(i = 1; i < n; i++){
         for(j = i; j > 0; j--){
+            //sempre joga o valor para tras, até estar ordenado
             if(v[j-1].valor > v[j].valor){
                 troca(v[j-1], v[j]);
             }
