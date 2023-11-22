@@ -8,7 +8,7 @@ struct noArv{
     struct noArv* esq;
     struct noArv* dir;
 };
-
+    
 typedef struct noArv noArv;
 
 noArv* arvCriaVazia(void){
@@ -53,7 +53,7 @@ noArv* arvInsere(noArv* a, int v){
 }
 
 noArv* arvRetira(noArv* r, int v){
-    if(r == NULL){return NULL}
+    if(r == NULL){return NULL;}
     else if(r->info > v){
         r->esq = arvRetira(r->esq, v);
     }
