@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import model.Driver;
+import model.Operator;
 import util.Dao;
 
 /**
@@ -46,13 +47,13 @@ public class DaoTest {
         dao.inserir(driver);
     }
     
-//    @Test
-//    public void testInserirOperador(){ 
-//        Operador op = new Operador("Rigby", "Parque Encantado",
-//                "rigby", "123" );
-//        Dao<Operador> dao = new Dao(Operador.class);
-//        dao.inserir(op);
-//    }
+    @Test
+    public void testInserirOperador(){ 
+        Operator op = new Operator("Rigby", "Parque Encantado",
+                "rigby", "123" );
+        Dao<Operator> dao = new Dao<Operator>(Operator.class);
+        dao.inserir(op);
+    }
     
 //    @Test
 //    public void testListarOperador(){
