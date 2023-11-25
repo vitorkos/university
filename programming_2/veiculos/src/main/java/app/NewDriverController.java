@@ -34,7 +34,7 @@ public class NewDriverController {
         driver.setCnh(String.valueOf(cnhField.getText()));
         driver.setCnh(cnhCategoryField.getText());
         driver.setSector(sectorField.getText());
-        Dao<Driver> dao = new Dao(Driver.class); 
+        Dao<Driver> dao = new Dao<Driver>(Driver.class); 
         dao.inserir(driver);
         limparCampos();
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -50,7 +50,7 @@ public class NewDriverController {
         cnhCategoryField.setText("");
         sectorField.setText("");
     }
-      
+
     @FXML
     private void voltarAoMenu() throws IOException{
         App.setRoot("menu");
