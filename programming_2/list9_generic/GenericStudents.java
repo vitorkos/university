@@ -25,5 +25,4 @@ public class GenericStudents {
             System.out.println("Matrícula: " + entry.getKey() + ", Nome: " + entry.getValue());
         }
     }
-    }
 }
