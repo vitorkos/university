@@ -1,6 +1,6 @@
 package exercise_exception;
 
-class TesteException {
+class TesteException extends Exception{
     public static void main(String[] args) {
         System.out.println("Início do main");
         metodo1();
@@ -24,4 +24,5 @@ class TesteException {
         }
         System.out.println("Fim do metodo2");
     }
+    
 }
