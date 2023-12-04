@@ -1,6 +1,12 @@
-module-info.class
-app/App.class
-app/SecondaryController.class
+model/Operator.class
+app/MenuController.class
 util/Dao.class
+model/Person.class
+module-info.class
+model/UseVehicle.class
+app/NewDriverController.class
+app/App.class
+util/Persistent.class
+model/Driver.class
 util/JpaUtil.class
-app/PrimaryController.class
+model/Vehicle.class

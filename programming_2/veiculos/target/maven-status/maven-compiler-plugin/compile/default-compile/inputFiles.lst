@@ -1,6 +1,12 @@
-/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/SecondaryController.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/model/Driver.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/util/Dao.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/module-info.java
-/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/PrimaryController.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/util/Persistent.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/model/UseVehicle.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/model/Vehicle.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/App.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/model/Person.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/MenuController.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/util/JpaUtil.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/model/Operator.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/NewDriverController.java
