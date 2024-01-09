@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class Dao<T> {
+public class Dao<T extends Persistivel> {
 
     private final Class<T> classe;
     EntityManager manager;
@@ -31,16 +31,21 @@ public class Dao<T> {
         return objeto;
     }
 
-    public void excluir(Integer id) {
+    public void excluir(T objeto) throws ExclusaoException{
         manager = JpaUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
-        T temp = manager.find(classe, id);
-        manager.remove(temp);
-        tx.commit();
-        manager.close();
+        try {
+            T temp = manager.find(classe, objeto.getCodigo());
+            manager.remove(temp);
+            tx.commit();
+        } catch (Exception e) {             
+            throw new ExclusaoException();
+        } finally {           
+            manager.close();
+        }
     }
-
+    
     public void inserir(T objeto) {
         manager = JpaUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();

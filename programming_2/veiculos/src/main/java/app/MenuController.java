@@ -8,13 +8,23 @@ import javafx.fxml.FXML;
 public class MenuController {
     
     @FXML
-    private void registerDriver() throws IOException {
-        App.setRoot("newDriver");
+    private void cadastrarMotorista() throws IOException {
+        App.setRoot("novoMotorista");
     }
     
     @FXML
-    private void registerOperator() throws IOException {
-        App.setRoot("newOperator");
+    private void cadastrarOperador() throws IOException {
+        App.setRoot("novoOperador");
+    }
+    
+    @FXML
+    private void excluirMotorista() throws IOException{
+        App.setRoot("excluirMotorista");
+    }
+    
+    @FXML
+    private void retirarVeiculo() throws IOException{
+        App.setRoot("retiradaVeiculo");
     }
     
     @FXML

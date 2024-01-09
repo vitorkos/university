@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="util.DaoTest" time="7.207" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="util.DaoTest" time="2.134" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="21.0.1+12-29"/>
@@ -32,7 +32,7 @@
     <property name="java.class.version" value="65.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="6.6.2-arch1-1"/>
+    <property name="os.version" value="6.6.8-arch1-1"/>
     <property name="library.jansi.path" value="/opt/maven/lib/jansi-native"/>
     <property name="user.home" value="/home/geedorah"/>
     <property name="user.timezone" value="America/Sao_Paulo"/>
@@ -57,6 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="util.DaoTest" name="util.DaoTest.testInserirMotorista" time="7.2"/>
-  <testcase classname="util.DaoTest" name="util.DaoTest.testInserirOperador" time="0.007"/>
+  <testcase classname="util.DaoTest" name="util.DaoTest.testInserirMotorista" time="2.035"/>
+  <testcase classname="util.DaoTest" name="util.DaoTest.testInserirOperador" time="0.005"/>
+  <testcase classname="util.DaoTest" name="util.DaoTest.testListarMotorista" time="0.094"/>
 </testsuite>

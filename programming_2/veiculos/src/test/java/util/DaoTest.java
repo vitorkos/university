@@ -1,15 +1,20 @@
 package util;
 
-//import modelo.Vaca;
+import java.time.LocalDate;
+import java.util.List;
+
+import modelo.Motorista;
+import modelo.Operador;
+import modelo.UsoVeiculo;
+import modelo.Veiculo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import model.Driver;
-import model.Operator;
-import util.Dao;
+
+
 
 /**
  *
@@ -35,23 +40,23 @@ public class DaoTest {
     @AfterEach
     public void tearDown() {
     }
-    
+
     @Test
     public void testInserirMotorista(){
-        Driver driver = new Driver();
-        driver.setName("Piolito");
-        driver.setAddress("Rua das Couves, n. 0, Bandeirates, PR");
-        driver.setCnh("2345678L");
-        driver.setCnhCategory("ABC");
-        Dao<Driver> dao = new Dao<Driver>(Driver.class);
-        dao.inserir(driver);
-    }
+        Motorista motorista = new Motorista();
+        motorista.setNome("Piolito");
+        motorista.setEndereco("Rua das Couves, n. 0, Bandeirates, PR");
+        motorista.setCnh(2345678L);
+        motorista.setCategoria("ABC");
+        Dao<Motorista> dao = new Dao<>(Motorista.class);
+        dao.inserir(motorista);
+    }  
     
     @Test
     public void testInserirOperador(){ 
-        Operator op = new Operator("Rigby", "Parque Encantado",
+        Operador op = new Operador("Rigby", "Parque Encantado",
                 "rigby", "123" );
-        Dao<Operator> dao = new Dao<Operator>(Operator.class);
+        Dao<Operador> dao = new Dao<>(Operador.class);
         dao.inserir(op);
     }
     
@@ -60,16 +65,16 @@ public class DaoTest {
 //        
 //    }
     
-//    @Test
-//    public void testListarMotorista(){
-//        Dao<Motorista> dao = new Dao(Motorista.class);
-//        List<Motorista> lista = dao.listarTodos();
-//        System.out.println("\n\n");
-//        for (Motorista m : lista){
-//            System.out.println("Nome: " + m.getNome());
-//        }
-//        System.out.println("\n\n");
-//    }
+    @Test
+    public void testListarMotorista(){
+        Dao<Motorista> dao = new Dao<>(Motorista.class);
+        List<Motorista> lista = dao.listarTodos();
+        System.out.println("\n\n");
+        for (Motorista m : lista){
+            System.out.println("Nome: " + m.getNome());
+        }
+        System.out.println("\n\n");
+    }
 //    
 //    @Test
 //    public void testInserirVeiculo(){
@@ -95,5 +100,4 @@ public class DaoTest {
 //        daoU.inserir(uso);
 //        
 //    }
-    
 }
