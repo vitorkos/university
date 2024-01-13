@@ -448,7 +448,14 @@ int testOnce()
     while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) != EOF)
     {
         printf("%.1f %.1f %.1f %.1f %.1f\n", v1, v2, v3, v4, v5);
+        dtAdd(v1, v2, v3, v4, v5);
+
+        
+
     }
+
+    // clean up
+    dtDeallocate();
 
     fclose(file);
 
