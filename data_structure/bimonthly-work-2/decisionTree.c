@@ -22,10 +22,9 @@ extern void dtDeallocate(void);
    stdout.  Intended for debugging. */
 extern void dtDebugPrint(const char *header);
 
-#endif  // ZMDP_SRC_PARSERS_DECISION_TREE_H_
+#endif // ZMDP_SRC_PARSERS_DECISION_TREE_H_
 
-
-//#include "tree.h"
+// #include "tree.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -426,11 +425,36 @@ void dtDebugPrint(const char *header)
  * TEST SECTION
  ************************/
 
-void testOnce(void)
+int testOnce()
 {
+    FILE *file;
+    file = fopen("treino.txt", "r"); // Change "input.txt" to the name of your file
+
+    if (file == NULL)
+    {
+        printf("Error opening the file.\n");
+        return 1;
+    }
+
+    int nActions, nStates, nObservations;
+    float v1, v2, v3, v4, v5, result;
+
+    // Read the first line
+    fscanf(file, "%d %d %d", &nActions, &nStates, &nObservations);
+    printf("%d %d %d\n", nActions, nStates, nObservations);
+    // Read the following lines
+    while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) != EOF)
+    {
+        printf("%.1f %.1f %.1f %.1f %.1f\n", v1, v2, v3, v4, v5);
+    }
+
+    fclose(file);
+
+    return 0;
+    /*
     double result;
 
-    /* set up table */
+    //set up table
     dtInit(5, 5, 5);
 
     dtAdd(0, 1, 2, 3, 0.5);
@@ -444,7 +468,7 @@ void testOnce(void)
 
     dtAdd(-1, 2, -1, -1, 2.7);
 
-    /* do a few queries */
+    //do a few queries
     result = dtGet(0, 1, 2, 3);
     printf("expecting: result=%lf\n", 0.7);
     printf("got:       result=%lf\n", result);
@@ -461,48 +485,14 @@ void testOnce(void)
     printf("expecting: result=%lf\n", 2.7);
     printf("got:       result=%lf\n", result);
 
-    /* clean up */
+    // clean up
     dtDeallocate();
+    */
 }
 
 int main(int argc, char **argv)
 {
+    // testOnce();
     testOnce();
-    testOnce();
-
-    FILE *file;
-    file = fopen("treino.txt", "r"); // Change "input.txt" to the name of your file
-
-    if (file == NULL)
-    {
-        printf("Error opening the file.\n");
-        return 1;
-    }
-
-    int nActions, nStates, nObservations;
-    float v1, v2, v3, v4, v5, result;
-
-    // Read the first line
-    fscanf(file, "%d %d %d", &nActions, &nStates, &nObservations);
-    printf("%d %d %d\n", nActions, nStates, nObservations);
-
-    /* set up table */
-    dtInit(nActions, nStates, nObservations);
-
-    // Read the following lines
-    while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) != EOF)
-    {
-        printf("%.1f %.1f %.1f %.1f %.1f\n", v1, v2, v3, v4, v5);
-        // Uso de floats em dtAdd
-        //dtAdd((int)v1, (int)v2, (int)v3, (int)v4, v5);
-
-        /* do a few queries */
-        //result = dtGet((int)v1, (int)v2, (int)v3, (int)v4);
-        //printf("expecting: result=%lf\n", v5);
-        //printf("got:       result=%lf\n", result);
-    }
-    /* clean up */
-    //dtDeallocate();
-    fclose(file);
     return 0;
 }
