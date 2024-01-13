@@ -442,6 +442,8 @@ int testOnce()
     // Read the first line
     fscanf(file, "%d %d %d", &nActions, &nStates, &nObservations);
     printf("%d %d %d\n", nActions, nStates, nObservations);
+    //set up table
+    dtInit(nActions, nStates, nObservations);
     // Read the following lines
     while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) != EOF)
     {
