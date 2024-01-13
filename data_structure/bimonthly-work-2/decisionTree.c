@@ -448,14 +448,21 @@ int testOnce()
     while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) != EOF)
     {
         printf("%.1f %.1f %.1f %.1f %.1f\n", v1, v2, v3, v4, v5);
-        dtAdd(v1, v2, v3, v4, v5);
 
+        dtAdd((int)v1, (int)v2, (int)v3, (int)v4, v5);
         
+        //do a few queries
+        //result = dtGet((int)v1, (int)v2, (int)v3, (int)v4);
+        //printf("expecting: result=%lf\n", v5);
+        //printf("got:       result=%lf\n", result);
+
 
     }
 
     // clean up
+    //dtDebugPrint("Before deallocate");
     dtDeallocate();
+    //dtDebugPrint("After deallocate");
 
     fclose(file);
 
