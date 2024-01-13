@@ -1,6 +1,7 @@
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/modelo/Operador.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/util/Dao.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/module-info.java
+/home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/NovoOperadorController.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/NovoMotoristaController.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/util/ExclusaoException.java
 /home/geedorah/Code/initUniversity/programming_2/veiculos/src/main/java/app/ExcluirMotoristaController.java
