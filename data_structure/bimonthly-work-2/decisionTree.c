@@ -36,7 +36,8 @@ extern void dtDebugPrint(const char *header);
  ************************/
 
 #define DT_TABLE_DEPTH (4)
-#define WILDCARD_SPEC (-1) /* redundant definition with imm-reward.h */
+//#define WILDCARD_SPEC (-1) /* redundant definition with imm-reward.h */
+#define WILDCARD_SPEC_FLOAT (-1.0)
 
 enum
 {
@@ -47,6 +48,9 @@ enum
 /************************
  * DATA STRUCTURES
  ************************/
+
+// Alteração no tipo usado para representar valores curinga
+typedef float wildcard_t;
 
 struct DTNodeStruct;
 struct DTTableStruct;
@@ -226,7 +230,7 @@ static DTNode *dtConvertToTable(DTNode *in, int numEntries)
     return out;
 }
 
-DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
+DTNode *dtAddInternal(DTNode *node, wildcard_t *vec, int index, double val)
 {
     int i;
     int allWildcards;
@@ -238,7 +242,7 @@ DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
     allWildcards = 1;
     for (i = index; i < DT_TABLE_DEPTH; i++)
     {
-        if (vec[i] != WILDCARD_SPEC)
+        if (vec[i] != WILDCARD_SPEC_FLOAT)
         {
             allWildcards = 0;
             break;
@@ -252,7 +256,7 @@ DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
         dtDestroyNode(node);
         node = dtNewNodeVal(val);
     }
-    else if (WILDCARD_SPEC == vec[index])
+    else if (WILDCARD_SPEC_FLOAT == vec[index])
     {
         /* this vec element is a wildcard but not all the rest are... make
            sure the node is a table and addInternal to both defaultEntry and
@@ -274,7 +278,7 @@ DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
         /* this element of vec is not a wildcard... make sure the node is a
            table and modify just the appropriate entry */
         node = dtConvertToTable(node, gTableSizes[index]);
-        entryP = &node->data.subTree.entries[vec[index]];
+        entryP = &node->data.subTree.entries[(int)vec[index]];
         if (NULL == *entryP)
         {
             /* the given entry is not set at all yet.. first copy the default before
@@ -287,7 +291,7 @@ DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
     return node;
 }
 
-static double dtGetInternal(DTNode *node, int *vec, int index)
+static double dtGetInternal(DTNode *node, wildcard_t *vec, int index)
 {
     DTNode *entry;
 
@@ -298,7 +302,7 @@ static double dtGetInternal(DTNode *node, int *vec, int index)
     case DT_VAL:
         return node->data.val;
     case DT_TABLE:
-        entry = node->data.subTree.entries[vec[index]];
+        entry = node->data.subTree.entries[(int)vec[index]];
         if (NULL == entry)
         {
             entry = node->data.subTree.defaultEntry;
@@ -445,16 +449,15 @@ int testOnce()
     //set up table
     dtInit(nActions, nStates, nObservations);
     // Read the following lines
-    while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) != EOF)
+    while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) == 5)
     {
         printf("%.1f %.1f %.1f %.1f %.1f\n", v1, v2, v3, v4, v5);
 
-        dtAdd((int)v1, (int)v2, (int)v3, (int)v4, v5);
-        
-        //do a few queries
-        //result = dtGet((int)v1, (int)v2, (int)v3, (int)v4);
-        //printf("expecting: result=%lf\n", v5);
-        //printf("got:       result=%lf\n", result);
+        dtAdd(v1, v2, v3, v4, v5);
+        // Do a few queries
+        result = dtGet(v1, v2, v3, v4);
+        printf("expecting: result=%lf\n", v5);
+        printf("got:       result=%lf\n", result);
 
 
     }
