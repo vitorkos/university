@@ -463,52 +463,12 @@ int testOnce()
     }
 
     // clean up
-    //dtDebugPrint("Before deallocate");
     dtDeallocate();
-    //dtDebugPrint("After deallocate");
 
     fclose(file);
 
     return 0;
-    /*
-    double result;
-
-    //set up table
-    dtInit(5, 5, 5);
-
-    dtAdd(0, 1, 2, 3, 0.5);
-    dtAdd(0, 1, 2, 3, 0.7);
-
-    dtAdd(0, 1, 3, -1, -10.1);
-    dtAdd(0, 1, 3, -1, -10.3);
-
-    dtAdd(1, 0, 0, -1, 6.0);
-    dtAdd(1, 0, -1, -1, 7.0);
-
-    dtAdd(-1, 2, -1, -1, 2.7);
-
-    //do a few queries
-    result = dtGet(0, 1, 2, 3);
-    printf("expecting: result=%lf\n", 0.7);
-    printf("got:       result=%lf\n", result);
-
-    result = dtGet(0, 1, 3, 1);
-    printf("expecting: result=%lf\n", -10.3);
-    printf("got:       result=%lf\n", result);
-
-    result = dtGet(1, 0, 0, 0);
-    printf("expecting: result=%lf\n", 7.0);
-    printf("got:       result=%lf\n", result);
-
-    result = dtGet(3, 2, 0, 0);
-    printf("expecting: result=%lf\n", 2.7);
-    printf("got:       result=%lf\n", result);
-
-    // clean up
-    dtDeallocate();
-    */
 }
-
 int main(int argc, char **argv)
 {
     // testOnce();
