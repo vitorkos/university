@@ -20,10 +20,6 @@ extern double dtGet(int action, int cur_state, int next_state, int obs);
 /* Limpa todas as estruturas de dados da árvore de decisão no heap. */
 extern void dtDeallocate(void);
 
-/* Imprime uma representação textual da estrutura de dados da árvore de decisão em
-   stdout. Destinado a fins de depuração. */
-extern void dtDebugPrint(const char *header);
-
 #endif // ZMDP_SRC_PARSERS_DECISION_TREE_H_
 
 // #include "tree.h"
@@ -49,7 +45,6 @@ envolvem valores de ponto flutuante.
 #define DT_TABLE_DEPTH (4)
 //#define WILDCARD_SPEC (-1) /* redundant definition with imm-reward.h */
 #define WILDCARD_SPEC_FLOAT (-1.0)
-
 
 //Enumeração para tipos de nós na árvore de decisão
 
@@ -130,9 +125,6 @@ static void dtDestroyTable(DTTable *t);
 static DTNode *dtDeepCopyNode(const DTNode *in);
 static void dtDeepCopyTable(DTTable *out, const DTTable *in);
 static DTNode *dtConvertToTable(DTNode *in, int numEntries);
-static void dtSpaces(int indent);
-static void dtDebugPrintNode(DTNode *n, int indent);
-static void dtDebugPrintTable(DTTable *t, int indent);
 
 /************************
  * GLOBAL VARIABLES
@@ -173,7 +165,6 @@ static DTNode *dtNewNodeVal(double val)
     return out;
 }
 
-
 // Criação de Novo Nó com Tabela.
 
 /*
@@ -211,7 +202,6 @@ static void dtInitTable(DTTable *t, int numEntries)
     memset(t->entries, 0, numEntries * sizeof(DTNode *));
     t->defaultEntry = NULL; /* will be allocated later */
 }
-
 
 // Destruição de Nó.
 
@@ -309,7 +299,7 @@ incluindo cópias de todos os nós filhos.
 
 @param out: Ponteiro para a tabela de destino.
 @param in: Ponteiro para a tabela de origem.
- */
+*/
 
 static void dtDeepCopyTable(DTTable *out, const DTTable *in)
 {
@@ -357,7 +347,6 @@ static DTNode *dtConvertToTable(DTNode *in, int numEntries)
     default:
         assert(0 /* never reach this point */);
     }
-
     return out;
 }
 
@@ -468,85 +457,6 @@ static double dtGetInternal(DTNode *node, wildcard_t *vec, int index)
     }
 }
 
-// Imprime Espaços para Fins de Debugging.
-
-static void dtSpaces(int indent)
-{
-    int i;
-
-    for (i = 0; i < indent; i++)
-    {
-        putchar(' ');
-    }
-}
-
-// Imprime um Nó da Árvore de Decisão para Fins de Debugging.
-
-/*
-Esta função imprime um nó da árvore de decisão para fins de depuração, incluindo
-informações sobre o tipo do nó (VAL ou TABLE) e seu valor ou subárvore.
-
-@param n: Ponteiro para o nó a ser impresso.
-@param indent: Número de espaços para indentação.
-*/
-
-static void dtDebugPrintNode(DTNode *n, int indent)
-{
-    if (NULL == n)
-    {
-        dtSpaces(indent);
-        printf("(NULL)\n");
-        return;
-    }
-
-    switch (n->type)
-    {
-    case DT_VAL:
-        dtSpaces(indent);
-        printf("val = %lf\n", n->data.val);
-        break;
-    case DT_TABLE:
-        dtDebugPrintTable(&n->data.subTree, indent);
-        break;
-    default:
-        assert(0 /* never reach this point */);
-    }
-}
-
-// Imprime uma Tabela da Árvore de Decisão para Fins de Debugging.
-
-/*
-Esta função imprime uma tabela da árvore de decisão para fins de depuração, incluindo
-informações sobre a entrada padrão e as entradas específicas.
-
-@param t: Ponteiro para a tabela a ser impressa.
-@param indent: Número de espaços para indentação.
-*/
-
-static void dtDebugPrintTable(DTTable *t, int indent)
-{
-    int i;
-
-    dtSpaces(indent);
-    printf("table:\n");
-    dtSpaces(indent + 2);
-    printf("default:\n");
-    dtDebugPrintNode(t->defaultEntry, indent + 4);
-    for (i = 0; i < t->numEntries; i++)
-    {
-        dtSpaces(indent + 2);
-        if (NULL == t->entries[i])
-        {
-            printf("entry %d: (default)\n", i);
-        }
-        else
-        {
-            printf("entry %d:\n", i);
-            dtDebugPrintNode(t->entries[i], indent + 4);
-        }
-    }
-}
-
 /************************
  * EXPORTED FUNCTIONS
  ************************/
@@ -636,21 +546,6 @@ void dtDeallocate(void)
     gTree = NULL;
     free(gTableSizes);
     gTableSizes = NULL;
-}
-
-// Imprime uma representação textual da Árvore de Decisão para depuração.
-
-/*
-@param header Um cabeçalho opcional para a saída.
-
-Esta função imprime uma representação textual da estrutura da Árvore de Decisão,
-incluindo valores nos nós e entradas nas tabelas, para auxiliar na depuração do código.
-*/
-
-void dtDebugPrint(const char *header)
-{
-    printf("%s\n", header);
-    dtDebugPrintNode(gTree, 2);
 }
 
 /************************
