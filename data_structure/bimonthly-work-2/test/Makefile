@@ -3,9 +3,9 @@ CC = gcc
 # Defina as opções de compilação
 CFLAGS = -Wall -Wextra -pedantic
 # Defina o nome dos executáveis
-EXECUTABLE1 = trabalho
+EXECUTABLE1 = main
 # Arquivos fonte do primeiro projeto
-SOURCES1 = decisionTree.c tree.c
+SOURCES1 = main.c tree.c
 HEADERS1 = tree.h
 # Objetos gerados para o primeiro projeto
 OBJECTS1 = $(patsubst %.c,%.o,$(SOURCES1))

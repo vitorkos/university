@@ -46,7 +46,7 @@ typedef struct DTTableStruct DTTable;
 static int *gTableSizes = NULL; // Tamanhos das tabelas
 static DTNode *gTree = NULL; // Raiz da árvore de decisão
 
-static DTNode *dtNewNodeVal(double val)
+DTNode *dtNewNodeVal(double val)
 {
     DTNode *out;
 
@@ -57,7 +57,7 @@ static DTNode *dtNewNodeVal(double val)
     return out;
 }
 
-static DTNode *dtNewNodeTable(int numEntries)
+DTNode *dtNewNodeTable(int numEntries)
 {
     DTNode *out;
 
@@ -68,7 +68,7 @@ static DTNode *dtNewNodeTable(int numEntries)
     return out;
 }
 
-static void dtInitTable(DTTable *t, int numEntries)
+void dtInitTable(DTTable *t, int numEntries)
 {
     t->numEntries = numEntries;
     t->entries = (DTNode **)malloc(numEntries * sizeof(DTNode *));
@@ -76,7 +76,7 @@ static void dtInitTable(DTTable *t, int numEntries)
     t->defaultEntry = NULL; /* will be allocated later */
 }
 
-static void dtDestroyNode(DTNode *n)
+void dtDestroyNode(DTNode *n)
 {
     if (NULL == n)
         return;
@@ -96,7 +96,7 @@ static void dtDestroyNode(DTNode *n)
     free(n);
 }
 
-static void dtDestroyTable(DTTable *t)
+void dtDestroyTable(DTTable *t)
 {
     int i;
 
@@ -109,7 +109,7 @@ static void dtDestroyTable(DTTable *t)
     t->entries = NULL;
 }
 
-static DTNode *dtDeepCopyNode(const DTNode *in)
+DTNode *dtDeepCopyNode(const DTNode *in)
 {
     DTNode *out;
 
@@ -136,7 +136,7 @@ static DTNode *dtDeepCopyNode(const DTNode *in)
     return out;
 }
 
-static void dtDeepCopyTable(DTTable *out, const DTTable *in)
+void dtDeepCopyTable(DTTable *out, const DTTable *in)
 {
     int i;
 
@@ -151,7 +151,7 @@ static void dtDeepCopyTable(DTTable *out, const DTTable *in)
     }
 }
 
-static DTNode *dtConvertToTable(DTNode *in, int numEntries)
+DTNode *dtConvertToTable(DTNode *in, int numEntries)
 {
     DTNode *out;
 
@@ -234,7 +234,7 @@ DTNode *dtAddInternal(DTNode *node, wildcard_t *vec, int index, double val)
     return node;
 }
 
-static double dtGetInternal(DTNode *node, wildcard_t *vec, int index)
+double dtGetInternal(DTNode *node, wildcard_t *vec, int index)
 {
     DTNode *entry;
 
