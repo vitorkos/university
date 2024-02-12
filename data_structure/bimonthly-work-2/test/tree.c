@@ -6,8 +6,6 @@
 #include <string.h>
 #include "tree.h"
 
-#define ZMDP_SRC_PARSERS_DECISION_TREE_H_
-
 #define DT_TABLE_DEPTH (4)
 //#define WILDCARD_SPEC (-1) /* redundant definition with imm-reward.h */
 #define WILDCARD_SPEC_FLOAT (-1.0)
