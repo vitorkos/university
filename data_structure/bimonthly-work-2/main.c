@@ -31,21 +31,18 @@ void run(void){
     FILE *test;
     test = fopen("./teste.txt", "r");
 
-    if (test == NULL)
-    {
+    if (test == NULL){
         printf("Error opening the test file.\n");
         perror(NULL);
     }
 
     fscanf(test, "%d %d %d", &nActions, &nStates, &nObservations);
 
-    while (fscanf(test, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) == 5)
-    {
+    while (fscanf(test, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) == 5){
         result = dtGet(v1, v2, v3, v4);
         printf("expecting: %lf | got: %lf\n", v5, result);
 
-        if (v5 == result)
-        {
+        if (v5 == result){
             hits++;
         }
     }
@@ -60,8 +57,7 @@ void run(void){
            (float)hits * (float)100 / (float)45);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     run();
 
     return 0;
