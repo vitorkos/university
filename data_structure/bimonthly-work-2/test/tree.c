@@ -7,8 +7,7 @@
 #define DT_TABLE_DEPTH (4)
 #define WILDCARD_SPEC (-1)
 
-enum
-{
+enum{
     DT_VAL,
     DT_TABLE
 };
@@ -16,18 +15,15 @@ enum
 struct DTNodeStruct;
 struct DTTableStruct;
 
-struct DTTableStruct
-{
+struct DTTableStruct{
     int numEntries;
     struct DTNodeStruct **entries;
     struct DTNodeStruct *defaultEntry;
 };
 
-struct DTNodeStruct
-{
+struct DTNodeStruct{
     int type;
-    union
-    {
+    union{
         struct DTTableStruct subTree;
         double val;
     } data;
@@ -39,8 +35,7 @@ typedef struct DTTableStruct DTTable;
 static int *gTableSizes = NULL;
 static DTNode *gTree = NULL;
 
-DTNode *dtNewNodeVal(double val)
-{
+DTNode *dtNewNodeVal(double val){
     DTNode *out;
 
     out = (DTNode *)malloc(sizeof(DTNode));
@@ -50,8 +45,7 @@ DTNode *dtNewNodeVal(double val)
     return out;
 }
 
-DTNode *dtNewNodeTable(int numEntries)
-{
+DTNode *dtNewNodeTable(int numEntries){
     DTNode *out;
 
     out = (DTNode *)malloc(sizeof(DTNode));
@@ -61,21 +55,18 @@ DTNode *dtNewNodeTable(int numEntries)
     return out;
 }
 
-void dtInitTable(DTTable *t, int numEntries)
-{
+void dtInitTable(DTTable *t, int numEntries){
     t->numEntries = numEntries;
     t->entries = (DTNode **)malloc(numEntries * sizeof(DTNode *));
     memset(t->entries, 0, numEntries * sizeof(DTNode *));
     t->defaultEntry = NULL;
 }
 
-void dtDestroyNode(DTNode *n)
-{
+void dtDestroyNode(DTNode *n){
     if (NULL == n)
         return;
 
-    switch (n->type)
-    {
+    switch (n->type){
     case DT_VAL:
         break;
     case DT_TABLE:
@@ -87,12 +78,10 @@ void dtDestroyNode(DTNode *n)
     free(n);
 }
 
-void dtDestroyTable(DTTable *t)
-{
+void dtDestroyTable(DTTable *t){
     int i;
 
-    for (i = 0; i < t->numEntries; i++)
-    {
+    for (i = 0; i < t->numEntries; i++){
         dtDestroyNode(t->entries[i]);
     }
     dtDestroyNode(t->defaultEntry);
@@ -100,18 +89,14 @@ void dtDestroyTable(DTTable *t)
     t->entries = NULL;
 }
 
-DTNode *dtDeepCopyNode(const DTNode *in)
-{
+DTNode *dtDeepCopyNode(const DTNode *in){
     DTNode *out;
 
-    if (NULL == in)
-    {
+    if (NULL == in){
         out = NULL;
     }
-    else
-    {
-        switch (in->type)
-        {
+    else{
+        switch (in->type){
         case DT_VAL:
             out = dtNewNodeVal(in->data.val);
             break;
@@ -123,33 +108,27 @@ DTNode *dtDeepCopyNode(const DTNode *in)
             assert(0);
         }
     }
-
     return out;
 }
 
-void dtDeepCopyTable(DTTable *out, const DTTable *in)
-{
+void dtDeepCopyTable(DTTable *out, const DTTable *in){
     int i;
 
     dtInitTable(out, in->numEntries);
     out->defaultEntry = dtDeepCopyNode(in->defaultEntry);
-    for (i = 0; i < in->numEntries; i++)
-    {
-        if (NULL != in->entries[i])
-        {
+    for (i = 0; i < in->numEntries; i++){
+        if (NULL != in->entries[i]){
             out->entries[i] = dtDeepCopyNode(in->entries[i]);
         }
     }
 }
 
-DTNode *dtConvertToTable(DTNode *in, int numEntries)
-{
+DTNode *dtConvertToTable(DTNode *in, int numEntries){
     DTNode *out;
 
     assert(NULL != in);
 
-    switch (in->type)
-    {
+    switch (in->type){
     case DT_VAL:
         out = dtNewNodeTable(numEntries);
         out->data.subTree.defaultEntry = dtNewNodeVal(in->data.val);
@@ -164,47 +143,37 @@ DTNode *dtConvertToTable(DTNode *in, int numEntries)
     return out;
 }
 
-DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
-{
+DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val){
     int i;
     int allWildcards;
     DTNode **entryP;
 
     allWildcards = 1;
-    for (i = index; i < DT_TABLE_DEPTH; i++)
-    {
-        if (vec[i] != WILDCARD_SPEC)
-        {
+    for (i = index; i < DT_TABLE_DEPTH; i++){
+        if (vec[i] != WILDCARD_SPEC){
             allWildcards = 0;
             break;
         }
     }
-
-    if (allWildcards)
-    {
+    if (allWildcards){
         dtDestroyNode(node);
         node = dtNewNodeVal(val);
     }
-    else if (WILDCARD_SPEC == vec[index])
-    {
+    else if (WILDCARD_SPEC == vec[index]){
         node = dtConvertToTable(node, gTableSizes[index]);
         node->data.subTree.defaultEntry =
             dtAddInternal(node->data.subTree.defaultEntry, vec, index + 1, val);
-        for (i = 0; i < gTableSizes[index]; i++)
-        {
-            if (NULL != node->data.subTree.entries[i])
-            {
+        for (i = 0; i < gTableSizes[index]; i++){
+            if (NULL != node->data.subTree.entries[i]){
                 node->data.subTree.entries[i] =
                     dtAddInternal(node->data.subTree.entries[i], vec, index + 1, val);
             }
         }
     }
-    else
-    {
+    else{
         node = dtConvertToTable(node, gTableSizes[index]);
         entryP = &node->data.subTree.entries[vec[index]];
-        if (NULL == *entryP)
-        {
+        if (NULL == *entryP){
             *entryP = dtDeepCopyNode(node->data.subTree.defaultEntry);
         }
         *entryP = dtAddInternal(*entryP, vec, index + 1, val);
@@ -212,20 +181,17 @@ DTNode *dtAddInternal(DTNode *node, int *vec, int index, double val)
     return node;
 }
 
-double dtGetInternal(DTNode *node, int *vec, int index)
-{
+double dtGetInternal(DTNode *node, int *vec, int index){
     DTNode *entry;
 
     assert(NULL != node);
 
-    switch (node->type)
-    {
+    switch (node->type){
     case DT_VAL:
         return node->data.val;
     case DT_TABLE:
         entry = node->data.subTree.entries[vec[index]];
-        if (NULL == entry)
-        {
+        if (NULL == entry){
             entry = node->data.subTree.defaultEntry;
         }
         return dtGetInternal(entry, vec, index + 1);
@@ -234,8 +200,7 @@ double dtGetInternal(DTNode *node, int *vec, int index)
     }
 }
 
-void dtInit(int numActions, int numStates, int numObservations)
-{
+void dtInit(int numActions, int numStates, int numObservations){
     if (NULL != gTree)
         return;
 
@@ -248,8 +213,7 @@ void dtInit(int numActions, int numStates, int numObservations)
     gTree = dtNewNodeVal(0);
 }
 
-void dtAdd(int action, int cur_state, int next_state, int obs, double val)
-{
+void dtAdd(int action, int cur_state, int next_state, int obs, double val){
     int vec[DT_TABLE_DEPTH];
     vec[0] = action;
     vec[1] = cur_state;
@@ -259,8 +223,7 @@ void dtAdd(int action, int cur_state, int next_state, int obs, double val)
     gTree = dtAddInternal(gTree, vec, 0, val);
 }
 
-double dtGet(int action, int cur_state, int next_state, int obs)
-{
+double dtGet(int action, int cur_state, int next_state, int obs){
     int vec[DT_TABLE_DEPTH];
     vec[0] = action;
     vec[1] = cur_state;
@@ -270,8 +233,7 @@ double dtGet(int action, int cur_state, int next_state, int obs)
     return dtGetInternal(gTree, vec, 0);
 }
 
-void dtDeallocate(void)
-{
+void dtDeallocate(void){
     dtDestroyNode(gTree);
     gTree = NULL;
     free(gTableSizes);
