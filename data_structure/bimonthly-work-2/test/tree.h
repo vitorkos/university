@@ -27,5 +27,9 @@ void dtDestroyTable(DTTable *t);
 DTNode *dtDeepCopyNode(const DTNode *in);
 void dtDeepCopyTable(DTTable *out, const DTTable *in);
 DTNode *dtConvertToTable(DTNode *in, int numEntries);
+void dtSpaces(int indent);
+void dtDebugPrintNode(DTNode *n, int indent);
+void dtDebugPrintTable(DTTable *t, int indent);
+void dtDebugPrint(const char *header);
 
 #endif // TREE_H
