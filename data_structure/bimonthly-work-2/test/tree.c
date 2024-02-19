@@ -200,6 +200,54 @@ double dtGetInternal(DTNode *node, int *vec, int index){
     }
 }
 
+void dtSpaces(int indent) {
+  int i;
+
+  for (i = 0; i < indent; i++) {
+    putchar(' ');
+  }
+}
+
+void dtDebugPrintNode(DTNode *n, int indent) {
+    if (NULL == n) {
+        dtSpaces(indent);
+        printf("(NULL)\n");
+        return;
+    }
+  
+    switch (n->type) {
+    case DT_VAL:
+        dtSpaces(indent);
+        printf("val = %lf\n", n->data.val);
+        break;
+    case DT_TABLE:
+        dtDebugPrintTable(&n->data.subTree, indent);
+        break;
+    default:
+        assert(0 /* never reach this point */);
+    }
+}
+
+void dtDebugPrintTable(DTTable *t, int indent) {
+    int i;
+  
+    dtSpaces(indent);
+    printf("table:\n");
+    dtSpaces(indent + 2);
+    printf("default:\n");
+    dtDebugPrintNode(t->defaultEntry, indent + 4);
+    for (i = 0; i < t->numEntries; i++) {
+        dtSpaces(indent + 2);
+        if (NULL == t->entries[i]) {
+            printf("entry %d: (default)\n", i);
+        } else {
+            printf("entry %d:\n", i);
+            dtDebugPrintNode(t->entries[i], indent + 4);
+        }
+    }
+}
+
+
 void dtInit(int numActions, int numStates, int numObservations){
     if (NULL != gTree)
         return;
@@ -238,6 +286,11 @@ void dtDeallocate(void){
     gTree = NULL;
     free(gTableSizes);
     gTableSizes = NULL;
+}
+
+void dtDebugPrint(const char *header) {
+    printf("%s\n", header);
+    dtDebugPrintNode(gTree, 2);
 }
 
 int testOnce()
