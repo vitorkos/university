@@ -1,5 +1,3 @@
-// Functions implementations
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,42 +5,39 @@
 #include "tree.h"
 
 #define DT_TABLE_DEPTH (4)
-//#define WILDCARD_SPEC (-1) /* redundant definition with imm-reward.h */
-#define WILDCARD_SPEC_FLOAT (-1.0)
 
 enum
 {
-    DT_VAL, // Nó de valor
-    DT_TABLE // Nó de tabela
+    DT_VAL,
+    DT_TABLE
 };
 
-typedef float wildcard_t;
 
 struct DTNodeStruct;
 struct DTTableStruct;
 
 struct DTTableStruct
 {
-    int numEntries; // Número de entradas na tabela
-    struct DTNodeStruct **entries; // Ponteiro para as entradas da tabela
-    struct DTNodeStruct *defaultEntry; // Entrada padrão (usada quando uma entrada específica não está definida)
+    int numEntries;
+    struct DTNodeStruct **entries;
+    struct DTNodeStruct *defaultEntry;
 };
 
 struct DTNodeStruct
 {
-    int type; // Tipo do nó: DT_VAL ou DT_TABLE
+    int type;
     union
     {
-        struct DTTableStruct subTree; // Subárvore (usada quando o tipo é DT_TABLE)
-        double val; // Valor associado (usado quando o tipo é DT_VAL)
+        struct DTTableStruct subTree;
+        double val;
     } data;
 };
 
 typedef struct DTNodeStruct DTNode;
 typedef struct DTTableStruct DTTable;
 
-static int *gTableSizes = NULL; // Tamanhos das tabelas
-static DTNode *gTree = NULL; // Raiz da árvore de decisão
+static int *gTableSizes = NULL;
+static DTNode *gTree = NULL;
 
 DTNode *dtNewNodeVal(double val)
 {
@@ -71,7 +66,7 @@ void dtInitTable(DTTable *t, int numEntries)
     t->numEntries = numEntries;
     t->entries = (DTNode **)malloc(numEntries * sizeof(DTNode *));
     memset(t->entries, 0, numEntries * sizeof(DTNode *));
-    t->defaultEntry = NULL; /* will be allocated later */
+    t->defaultEntry = NULL;
 }
 
 void dtDestroyNode(DTNode *n)
@@ -82,13 +77,13 @@ void dtDestroyNode(DTNode *n)
     switch (n->type)
     {
     case DT_VAL:
-        /* Nada a fazer */
+        
         break;
     case DT_TABLE:
         dtDestroyTable(&n->data.subTree);
         break;
     default:
-        assert(0 /* Nunca atingirá este ponto */);
+        assert(0);
     }
 
     free(n);
@@ -127,7 +122,7 @@ DTNode *dtDeepCopyNode(const DTNode *in)
             dtDeepCopyTable(&out->data.subTree, &in->data.subTree);
             break;
         default:
-            assert(0 /* never reach this point */);
+            assert(0);
         }
     }
 
@@ -166,24 +161,21 @@ DTNode *dtConvertToTable(DTNode *in, int numEntries)
         out = in;
         break;
     default:
-        assert(0 /* never reach this point */);
+        assert(0);
     }
     return out;
 }
 
-DTNode *dtAddInternal(DTNode *node, wildcard_t *vec, int index, double val)
+DTNode *dtAddInternal(DTNode *node, float *vec, int index, double val)
 {
     int i;
     int allWildcards;
     DTNode **entryP;
 
-    /* Define allWildcards como verdadeiro se todos os elementos restantes de vec são
-       wildcards. (allWildcards é vacuamente verdadeiro se index >=
-       DT_TABLE_DEPTH). */
     allWildcards = 1;
     for (i = index; i < DT_TABLE_DEPTH; i++)
     {
-        if (vec[i] != WILDCARD_SPEC_FLOAT)
+        if (vec[i] != -1)
         {
             allWildcards = 0;
             break;
@@ -192,16 +184,11 @@ DTNode *dtAddInternal(DTNode *node, wildcard_t *vec, int index, double val)
 
     if (allWildcards)
     {
-        /* todos os elementos restantes de vec são wildcards... destrói qualquer nó
-           que estava presente antes e substitui por um nó VAL */
         dtDestroyNode(node);
         node = dtNewNodeVal(val);
     }
-    else if (WILDCARD_SPEC_FLOAT == vec[index])
+    else if (-1 == vec[index])
     {
-        /* este elemento de vec é um wildcard, mas nem todos os outros são... garante
-           que o nó seja uma tabela e adiciona internamente tanto para defaultEntry quanto
-           para todas as entradas não nulas na tabela */
         node = dtConvertToTable(node, gTableSizes[index]);
         node->data.subTree.defaultEntry =
             dtAddInternal(node->data.subTree.defaultEntry, vec, index + 1, val);
@@ -216,23 +203,19 @@ DTNode *dtAddInternal(DTNode *node, wildcard_t *vec, int index, double val)
     }
     else
     {
-        /* este elemento de vec não é um wildcard... garante que o nó seja uma
-           tabela e modifica apenas a entrada apropriada */
         node = dtConvertToTable(node, gTableSizes[index]);
         entryP = &node->data.subTree.entries[(int)vec[index]];
         if (NULL == *entryP)
         {
-            /* a entrada dada ainda não está definida... primeiro copie o padrão antes de
-               fazer modificações */
+            
             *entryP = dtDeepCopyNode(node->data.subTree.defaultEntry);
         }
         *entryP = dtAddInternal(*entryP, vec, index + 1, val);
     }
-
     return node;
 }
 
-double dtGetInternal(DTNode *node, wildcard_t *vec, int index)
+double dtGetInternal(DTNode *node, float *vec, int index)
 {
     DTNode *entry;
 
@@ -250,16 +233,14 @@ double dtGetInternal(DTNode *node, wildcard_t *vec, int index)
         }
         return dtGetInternal(entry, vec, index + 1);
     default:
-        assert(0 /* never reach this point */);
+        assert(0);
     }
 }
 
 void dtInit(int numActions, int numStates, int numObservations)
 {
-    /* guard to prevent double initialization */
     if (NULL != gTree)
         return;
-
     gTableSizes = (int *)malloc(DT_TABLE_DEPTH * sizeof(int));
     gTableSizes[0] = numActions;
     gTableSizes[1] = numStates;
@@ -268,7 +249,6 @@ void dtInit(int numActions, int numStates, int numObservations)
 
     gTree = dtNewNodeVal(0);
 }
-
 void dtAdd(int action, int cur_state, int next_state, int obs, double val)
 {
     int vec[DT_TABLE_DEPTH];
@@ -279,7 +259,6 @@ void dtAdd(int action, int cur_state, int next_state, int obs, double val)
 
     gTree = dtAddInternal(gTree, vec, 0, val);
 }
-
 double dtGet(int action, int cur_state, int next_state, int obs)
 {
     int vec[DT_TABLE_DEPTH];
@@ -290,7 +269,6 @@ double dtGet(int action, int cur_state, int next_state, int obs)
 
     return dtGetInternal(gTree, vec, 0);
 }
-
 void dtDeallocate(void)
 {
     dtDestroyNode(gTree);
@@ -298,39 +276,34 @@ void dtDeallocate(void)
     free(gTableSizes);
     gTableSizes = NULL;
 }
-
 int testOnce()
 {
     FILE *file;
-    file = fopen("treino.txt", "r"); // Change "input.txt" to the name of your file
+    file = fopen("treino.txt", "r");
 
     if (file == NULL)
     {
         printf("Error opening the file.\n");
         return 1;
     }
-
     int nActions, nStates, nObservations;
     float v1, v2, v3, v4, v5, result;
 
-    // Read the first line
     fscanf(file, "%d %d %d", &nActions, &nStates, &nObservations);
     printf("%d %d %d\n", nActions, nStates, nObservations);
-    //set up table
+
     dtInit(nActions, nStates, nObservations);
-    // Read the following lines
+
     while (fscanf(file, "%f,%f,%f,%f,%f", &v1, &v2, &v3, &v4, &v5) == 5)
     {
         printf("%.1f %.1f %.1f %.1f %.1f\n", v1, v2, v3, v4, v5);
 
         dtAdd(v1, v2, v3, v4, v5);
-        // Do a few queries
+
         result = dtGet(v1, v2, v3, v4);
         printf("expecting: result=%lf\n", v5);
         printf("got:       result=%lf\n", result);
     }
-
-    // clean up
     dtDeallocate();
     fclose(file);
     return 0;
