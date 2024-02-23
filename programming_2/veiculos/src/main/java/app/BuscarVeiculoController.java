@@ -74,4 +74,9 @@ public class BuscarVeiculoController {
         }
     }
 
+    @FXML
+    private void goToMenu() throws IOException{
+      App.setRoot("menu");
+    }
+
 }
