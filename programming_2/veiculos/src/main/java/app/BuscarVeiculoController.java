@@ -54,7 +54,7 @@ public class BuscarVeiculoController {
 
             for (UsoVeiculo vehicleUse : vehiclesUseList) {
                 if (String.valueOf(vehicle).equals(String.valueOf(vehicleUse.getVehicle()))) {
-                    if (String.valueOf(vehicleUse.getWithdraw()).equals(String.valueOf(date))) {
+                    if (date.isAfter(vehicleUse.getWithdraw()) && date.isBefore(vehicleUse.getDevolution())) {
                         drivers.add(vehicleUse.getDriver().getName() + " " + vehicleUse.getDriver().getCnh());
                     }
                 }
