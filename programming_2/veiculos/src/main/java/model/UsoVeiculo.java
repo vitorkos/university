@@ -91,6 +91,7 @@ public class UsoVeiculo implements Serializable, Persistivel {
         this.devolution = devolution;
     }
 
+    /*
     @Override
     public int hashCode() {
         int hash = 7;
@@ -116,5 +117,5 @@ public class UsoVeiculo implements Serializable, Persistivel {
         }
         return Objects.equals(this.vehicle, other.vehicle);
     }
-
+*/
 }
