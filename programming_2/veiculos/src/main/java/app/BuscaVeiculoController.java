@@ -31,4 +31,14 @@ public class BuscaVeiculoController {
     private Dao<Veiculo> daoVehicle;
 
     private Dao<UsoVeiculo> daoVehicleUse;
+
+    @FXML
+    private void initialize() {
+        daoVehicle = new Dao(Veiculo.class);
+        daoVehicleUse = new Dao(UsoVeiculo.class);
+
+        List<Veiculo> getVehicles = daoVehicle.getAll();
+        ObservableList<Veiculo> getVehiclesObservable = FXCollections.observableArrayList(getVehicles);
+        vehicles.setItems(getVehiclesObservable);
+    }
 }
