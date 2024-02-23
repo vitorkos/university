@@ -19,5 +19,16 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class BuscaVeiculoController {
-    
+    @FXML
+    private ListView<String> drivers;
+
+    @FXML
+    private ComboBox<Veiculo> vehicles;
+
+    @FXML
+    private DatePicker datePicker;
+
+    private Dao<Veiculo> daoVehicle;
+
+    private Dao<UsoVeiculo> daoVehicleUse;
 }
