@@ -6,33 +6,32 @@ import app.App;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-
 public class MenuController {
 
-    @FXML
-    private void createDriver() throws IOException {
-        App.setRoot("createDriver");
-    }
+  @FXML
+  private void createDriver() throws IOException {
+    App.setRoot("createDriver");
+  }
 
-    @FXML
-    private void deleteDriver() throws IOException{
-        App.setRoot("deleteDriver");
-    }
+  @FXML
+  private void deleteDriver() throws IOException {
+    App.setRoot("deleteDriver");
+  }
 
-    @FXML
-    private void createVehicle() throws IOException{
-        App.setRoot("createVehicle");
-    }
+  @FXML
+  private void createVehicle() throws IOException {
+    App.setRoot("createVehicle");
+  }
 
-    @FXML
-    private void createOperator() throws IOException{
-        App.setRoot("createOperator");
-    }
+  @FXML
+  private void createOperator() throws IOException {
+    App.setRoot("createOperator");
+  }
 
-    @FXML
-    private void withdrawVehicle() throws IOException{
-        App.setRoot("withdrawVehicle");
-    }
+  @FXML
+  private void withdrawVehicle() throws IOException {
+    App.setRoot("withdrawVehicle");
+  }
 
   @FXML
   private void listVehicles() throws IOException {
@@ -54,10 +53,15 @@ public class MenuController {
     App.setRoot("withdrawDevolution");
   }
 
-    @FXML
-    private void exit(){
-        Platform.exit();
-        System.exit(0);
-    }
+  @FXML
+  private void exit() {
+    Platform.exit();
+    System.exit(0);
+  }
+  
+  @FXML
+  private void getWithdrawVehicle() throws IOException {
+    App.setRoot("getWithdrawVehicle");
+  }
 
 }
