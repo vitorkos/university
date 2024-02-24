@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import util.Persistivel;
+import model.Veiculo;
 
 @Entity
 @Table(name = "vehicle_use")
@@ -89,6 +90,10 @@ public class UsoVeiculo implements Serializable, Persistivel {
 
     public void setDevolution(LocalDate devolution) {
         this.devolution = devolution;
+    }
+    @Override
+        public String toString() {
+            return vehicle.getBrand() + "-" + vehicle.getModel() + "-" + vehicle.getPlate();
     }
 
     /*
