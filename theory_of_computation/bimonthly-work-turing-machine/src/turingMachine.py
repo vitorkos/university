@@ -1,3 +1,7 @@
+# a maquina soluciona partialmente
+#resolve as entradas que são aceitas, mas entra em loop nas que são rejeitadas
+import json
+
 class TuringMachine:
     def __init__(self, states, initial_state, final_states, transitions, blank_symbol):
         self.states = states
@@ -39,27 +43,19 @@ class TuringMachine:
                 return False
             self.step()
 
-# Exemplo de uso:
+with open('./duplo_bal.json', 'r') as f:
+    rules = json.load(f)
+
 states = {0, 1, 2, 3, 4}
-initial_state = 0
-final_states = {4}
-blank_symbol = '_'
-transitions = [
-    {"from": 0, "to": 1, "read": "a", "write": "A", "dir":"R"},
-    {"from": 1, "to": 1, "read": "a", "write": "a", "dir":"R"},
-    {"from": 1, "to": 1, "read": "B", "write": "B", "dir":"R"},
-    {"from": 1, "to": 2, "read": "b", "write": "B", "dir":"L"},
-    {"from": 2, "to": 2, "read": "B", "write": "B", "dir":"L"},
-    {"from": 2, "to": 2, "read": "a", "write": "a", "dir":"L"},
-    {"from": 2, "to": 0, "read": "A", "write": "A", "dir":"R"},
-    {"from": 0, "to": 3, "read": "B", "write": "B", "dir":"R"},
-    {"from": 3, "to": 3, "read": "B", "write": "B", "dir":"R"},
-    {"from": 3, "to": 4, "read": "_", "write": "_", "dir":"L"}      
-]
+initial_state = rules['initial']
+final_states = rules['final']
+blank_symbol = rules['white']
+transitions = rules['transitions']
 
 tm = TuringMachine(states, initial_state, final_states, transitions, blank_symbol)
-with open('./input/duplobal2.in', 'r') as f:
+with open('./input/duplobal.in', 'r') as f:
     input_string = f.read().strip()
+
 result = tm.run(input_string)
 if result:
     print('aceita')
