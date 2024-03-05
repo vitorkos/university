@@ -1,5 +1,3 @@
-# a maquina soluciona partialmente
-#resolve as entradas que são aceitas, mas entra em loop nas que são rejeitadas
 import json
 
 class TuringMachine:
@@ -43,6 +41,10 @@ class TuringMachine:
                 return False
             self.step()
 
+    def save_tape(self, output_file):
+        with open(output_file, 'w') as f:
+            f.write(''.join(self.tape))
+
 with open('./duplo_bal.json', 'r') as f:
     rules = json.load(f)
 
@@ -61,3 +63,5 @@ if result:
     print('aceita')
 else:
     print('rejeita')
+
+tm.save_tape('./output/fita.txt')
