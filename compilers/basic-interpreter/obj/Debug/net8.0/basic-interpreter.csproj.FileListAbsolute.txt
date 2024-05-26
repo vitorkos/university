@@ -1,0 +1,15 @@
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.GeneratedMSBuildEditorConfig.editorconfig
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.AssemblyInfoInputs.cache
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.AssemblyInfo.cs
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.csproj.CoreCompileInputs.cache
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.sourcelink.json
+/home/dijkstra/code/university/compilers/basic-interpreter/bin/Debug/net8.0/basic-interpreter
+/home/dijkstra/code/university/compilers/basic-interpreter/bin/Debug/net8.0/basic-interpreter.deps.json
+/home/dijkstra/code/university/compilers/basic-interpreter/bin/Debug/net8.0/basic-interpreter.runtimeconfig.json
+/home/dijkstra/code/university/compilers/basic-interpreter/bin/Debug/net8.0/basic-interpreter.dll
+/home/dijkstra/code/university/compilers/basic-interpreter/bin/Debug/net8.0/basic-interpreter.pdb
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.dll
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/refint/basic-interpreter.dll
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.pdb
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/basic-interpreter.genruntimeconfig.cache
+/home/dijkstra/code/university/compilers/basic-interpreter/obj/Debug/net8.0/ref/basic-interpreter.dll
