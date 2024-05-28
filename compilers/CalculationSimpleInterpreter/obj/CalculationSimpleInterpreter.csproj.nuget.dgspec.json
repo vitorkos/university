@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/dijkstra/code/university/compilers/compiler/compiler.csproj": {}
+    "/home/dijkstra/code/university/compilers/CalculationSimpleInterpreter/CalculationSimpleInterpreter.csproj": {}
   },
   "projects": {
-    "/home/dijkstra/code/university/compilers/compiler/compiler.csproj": {
+    "/home/dijkstra/code/university/compilers/CalculationSimpleInterpreter/CalculationSimpleInterpreter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/dijkstra/code/university/compilers/compiler/compiler.csproj",
-        "projectName": "compiler",
-        "projectPath": "/home/dijkstra/code/university/compilers/compiler/compiler.csproj",
+        "projectUniqueName": "/home/dijkstra/code/university/compilers/CalculationSimpleInterpreter/CalculationSimpleInterpreter.csproj",
+        "projectName": "CalculationSimpleInterpreter",
+        "projectPath": "/home/dijkstra/code/university/compilers/CalculationSimpleInterpreter/CalculationSimpleInterpreter.csproj",
         "packagesPath": "/home/dijkstra/.nuget/packages/",
-        "outputPath": "/home/dijkstra/code/university/compilers/compiler/obj/",
+        "outputPath": "/home/dijkstra/code/university/compilers/CalculationSimpleInterpreter/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/dijkstra/.nuget/NuGet/NuGet.Config"
