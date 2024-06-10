@@ -6,131 +6,67 @@ namespace SimpleCalculationInterpreter
 {
     public enum TokenType
     {
-        PRINT, VAR, NUM, EQ, SUM, SUB, OPEN, CLOSE, EOF
+        NUM, VAR, EQ, SUM, SUB, MUL, DIV, OPEN, CLOSE, PRINT, EOF, INVALID
     }
 
     public class Token
     {
-        public TokenType Type { get; set; }
-        public string Value { get; set; }
+        public TokenType Type { get; }
+        public string Value { get; }
 
         public Token(TokenType type, string value)
         {
             Type = type;
             Value = value;
         }
+
+        public override string ToString()
+        {
+            return $"{Type}({Value})";
+        }
     }
 
     public class Lexer
     {
+        private static readonly Regex TokenPattern = new Regex(@"\s*(?:(\d+)|([a-z]+)|(\=)|(\+)|(\-)|(\*)|(\/)|(\()|(\))|(PRINT)|(.))");
+
         private string _text;
-        private int _pos;
-        private char _currentChar;
+        private int _position;
 
-        private static readonly Regex VarRegex = new Regex(@"^[a-z]+$");
-
-
-        public Lexer(string text){
-            _text = text;
-            _pos = 0;
-            _currentChar = _text[_pos];
-        }
-
-        private void Advance(){
-            _pos++;
-            _currentChar = _pos < _text.Length ? _text[_pos] : '\0';
-        }
-
-        private void SkipWhitespace(){
-            while (_currentChar != '\0' && char.IsWhiteSpace(_currentChar)){
-                Advance();
-            }
-        }
-
-        private string Integer(){
-            string result = "";
-            while (_currentChar != '\0' && char.IsDigit(_currentChar)){
-                result += _currentChar;
-                Advance();
-            }
-            return result;
-        }
-
-        private string Var(){
-            string result = "";
-            while (_currentChar != '\0' && char.IsLetter(_currentChar)){
-                result += _currentChar;
-                Advance();
-            }
-            if (!VarRegex.IsMatch(result)){
-                throw new Exception($"Invalid variable name: {result}");
-            }
-            return result;
-        }
-
-        public List<Token> GetTokens()
+        public Lexer(string text)
         {
-            List<Token> tokens = new List<Token>();
-
-            while (_currentChar != '\0')
-            {
-                if (char.IsWhiteSpace(_currentChar)){
-                    SkipWhitespace();
-                    continue;
-                }
-
-                if (_currentChar == '+'){
-                    tokens.Add(new Token(TokenType.SUM, "+"));
-                    Advance();
-                    continue;
-                }
-
-                if (_currentChar == '-'){
-                    tokens.Add(new Token(TokenType.SUB, "-"));
-                    Advance();
-                    continue;
-                }
-
-                if (_currentChar == '='){
-                    tokens.Add(new Token(TokenType.EQ, "="));
-                    Advance();
-                    continue;
-                }
-
-                if (_currentChar == '('){
-                    tokens.Add(new Token(TokenType.OPEN, "("));
-                    Advance();
-                    continue;
-                }
-
-                if (_currentChar == ')'){
-                    tokens.Add(new Token(TokenType.CLOSE, ")"));
-                    Advance();
-                    continue;
-                }
-
-                if (char.IsDigit(_currentChar)){
-                    tokens.Add(new Token(TokenType.NUM, Integer()));
-                    continue;
-                }
-
-                if (char.IsLetter(_currentChar)){
-                    string varName = Var();
-                    if (varName == "PRINT"){
-                        tokens.Add(new Token(TokenType.PRINT, "PRINT"));
-                    }
-                    else{
-                        tokens.Add(new Token(TokenType.VAR, varName));
-                    }
-                    continue;
-                }
-
-                throw new Exception($"Invalid character: {_currentChar}");
-            }
-
-            tokens.Add(new Token(TokenType.EOF, ""));
-            return tokens;
+            _text = text;
+            _position = 0;
         }
 
+        public Token GetNextToken()
+        {
+            if (_position >= _text.Length)
+            {
+                return new Token(TokenType.EOF, string.Empty);
+            }
+
+            var match = TokenPattern.Match(_text, _position);
+
+            if (!match.Success)
+            {
+                return new Token(TokenType.INVALID, _text[_position++].ToString());
+            }
+
+            _position = match.Index + match.Length;
+
+            if (match.Groups[1].Success) return new Token(TokenType.NUM, match.Groups[1].Value);
+            if (match.Groups[2].Success) return new Token(TokenType.VAR, match.Groups[2].Value);
+            if (match.Groups[3].Success) return new Token(TokenType.EQ, match.Groups[3].Value);
+            if (match.Groups[4].Success) return new Token(TokenType.SUM, match.Groups[4].Value);
+            if (match.Groups[5].Success) return new Token(TokenType.SUB, match.Groups[5].Value);
+            if (match.Groups[6].Success) return new Token(TokenType.MUL, match.Groups[6].Value);
+            if (match.Groups[7].Success) return new Token(TokenType.DIV, match.Groups[7].Value);
+            if (match.Groups[8].Success) return new Token(TokenType.OPEN, match.Groups[8].Value);
+            if (match.Groups[9].Success) return new Token(TokenType.CLOSE, match.Groups[9].Value);
+            if (match.Groups[10].Success) return new Token(TokenType.PRINT, match.Groups[10].Value);
+
+            return new Token(TokenType.INVALID, match.Groups[11].Value);
+        }
     }
 }
