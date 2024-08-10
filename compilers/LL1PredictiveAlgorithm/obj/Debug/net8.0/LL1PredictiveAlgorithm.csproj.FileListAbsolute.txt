@@ -1,0 +1,15 @@
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/bin/Debug/net8.0/LL1PredictiveAlgorithm
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/bin/Debug/net8.0/LL1PredictiveAlgorithm.deps.json
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/bin/Debug/net8.0/LL1PredictiveAlgorithm.runtimeconfig.json
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/bin/Debug/net8.0/LL1PredictiveAlgorithm.dll
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/bin/Debug/net8.0/LL1PredictiveAlgorithm.pdb
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.GeneratedMSBuildEditorConfig.editorconfig
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.AssemblyInfoInputs.cache
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.AssemblyInfo.cs
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.csproj.CoreCompileInputs.cache
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.sourcelink.json
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.dll
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/refint/LL1PredictiveAlgorithm.dll
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.pdb
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/LL1PredictiveAlgorithm.genruntimeconfig.cache
+/home/dijkstra/code/university/compilers/LL1PredictiveAlgorithm/obj/Debug/net8.0/ref/LL1PredictiveAlgorithm.dll
