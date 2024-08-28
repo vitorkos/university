@@ -1,0 +1,25 @@
+PRINT 2     +     2 * (2+5+5+5+5+5)
+xis = 4+4
+PRINT xis+y
+PRINT y
+
+
+Gramática
+cmd : atrib 
+    | PRINT expr 
+atrib : VAR '=' expr
+expr  : term rest
+rest  : '+' expr
+      | '-' expr
+term  : NUM 
+      | VAR 
+      | '('expr')' 
+
+VAR = variável (uma sequencia de letras minúsculas)
+NUM = número natural (0 ... 999999)
+EQ '='
+SUM '+'
+SUB '-'
+OPEN '('
+CLOSE ')'
+PRINT 'PRINT'

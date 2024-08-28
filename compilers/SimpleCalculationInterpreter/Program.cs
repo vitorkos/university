@@ -9,7 +9,8 @@ namespace SimpleCalculationInterpreter
             string[] inputLines = {
                 "PRINT 2 + 2 * (2+5+5+5+5+5)",
                 "xis = 4+4",
-                "PRINT xis"
+                "PRINT xis",
+                "PRINT 10 / 2"
             };
 
             Interpreter interpreter = new Interpreter();
