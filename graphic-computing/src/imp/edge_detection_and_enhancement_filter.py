@@ -9,13 +9,10 @@ def canny_edge_detection(img, lowThreshold, highThreshold):
     kernel = gaussian_kernel(5, sigma=1)
     gauss = gaussian_blur(img, kernel)
 
-    # 2. Gradiente Sobel
     magnitude, angle = sobel_filters(gauss)
 
-    # 3. Supressão não-máxima
     nms = non_maximum_suppression(magnitude, angle)
 
-    # 4. Histerese
     thresh_img, weak, strong = threshold(nms, lowThreshold, highThreshold)
     result = hysteresis(thresh_img, weak, strong)
 
@@ -48,19 +45,15 @@ def non_maximum_suppression(magnitude, angle):
 
             direction = angle[i, j]
 
-            # 0 graus
             if (0 <= direction < 22.5) or (157.5 <= direction <= 180):
                 q = magnitude[i, j+1]
                 r = magnitude[i, j-1]
-            # 45 graus
             elif (22.5 <= direction < 67.5):
                 q = magnitude[i+1, j-1]
                 r = magnitude[i-1, j+1]
-            # 90 graus
             elif (67.5 <= direction < 112.5):
                 q = magnitude[i+1, j]
                 r = magnitude[i-1, j]
-            # 135 graus
             elif (112.5 <= direction < 157.5):
                 q = magnitude[i-1, j-1]
                 r = magnitude[i+1, j+1]
