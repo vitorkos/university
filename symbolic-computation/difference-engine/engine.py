@@ -23,19 +23,25 @@ def n_value_table(diff_table, steps=1):
             tbl[r].append(tbl[r][-1] + tbl[r + 1][-1])
     return tbl
 
+def polinomio(x, coeficientes):
+    soma, i = 0, 0
+    grau = len(coeficientes)-1
+    while(i<=grau):
+        soma += coeficientes[i] * (x**(grau-i))
+        i += 1
+    return soma
+
 
 if __name__ == '__main__':
-    def f(x):
-        return 2*(x**grade) - 3*x + 2
 
-    grade = 2
+    coeficientes = [2, 3, 4, 5]
     x = [0, 0.1 ,0.2, 0.3, 0.4]
-    y = [f(x) for x in x]
+    y = [polinomio(x, coeficientes) for x in x]
 
     idx = difference_engine(y)
     nxt_val = next_value(idx)
 
-    steps_to_09 = int(round((0.9 - x[-1]) / (x[1] - x[0])))
+    steps_to_09 = int(round((1.6 - x[-1]) / (x[1] - x[0])))
     diff_to_09 = n_value_table(idx, steps=steps_to_09)
     y_09_machine = diff_to_09[0][-1]
 
